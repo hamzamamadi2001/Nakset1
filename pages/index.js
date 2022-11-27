@@ -170,13 +170,11 @@ className='text-lg sm:text-4xl font-rubik '
         )
 }
 export async function getServerSideProps(context) {
-  console.log("this is context",context.req.headers.host)
- 
-    let response = await fetch("https://nakset.vercel.app/api/listCategories")
+  
+    let response = await fetch("https://datausa.io/api/data?drilldowns=Nation&measures=Population")
 
 let result = await response.json()
-console.log("fdsafsfasdfasf",result)
-
+ console.log(result)
  
 
 return {
