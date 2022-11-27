@@ -12,6 +12,7 @@ const client_secret='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'
 
 
 export default NextAuth({
+  secret:"fasdfei;lk;lmciadkfjei;kej;lksjafoi",
   callbacks: {
 
     async signIn({ user, account, profile, email, credentials }) {
