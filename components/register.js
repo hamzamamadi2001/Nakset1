@@ -19,7 +19,7 @@ async function handelRegister(e){
     password:password,
     username:username,
   }
-  let response = await fetch("https://master.d2omaoj1s5e329.amplifyapp.com/api/auth/register",{method: 'POST',
+  let response = await fetch("https://nakset-hamzamamadi2001.vercel.app/api/auth/register",{method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },
