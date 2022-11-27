@@ -35,7 +35,7 @@ function About({result}) {
     <div className='flex flex-col sm:flex-row-reverse flex-wrap justify-evenly items-center'>
   
   {result.map((res) => (
-  <Card src={res.photo}  title={res.name} unit={res.unit} price={res.price} id={res.id}></Card>
+  <Card key={res.id} src={res.photo}  title={res.name} unit={res.unit} price={res.price} id={res.id}></Card>
   
            
         ))}

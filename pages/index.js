@@ -158,7 +158,7 @@ className='text-lg sm:text-4xl font-rubik '
 <div className='flex flex-col sm:flex-row-reverse flex-wrap justify-evenly items-center'>
   
 {result.map((res) => (
-<Card src={res.photo}  title={res.name} id={res.id}></Card>
+<Card key={res.id} src={res.photo}  title={res.name} id={res.id}></Card>
 
          
       ))}

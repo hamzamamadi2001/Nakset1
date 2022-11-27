@@ -8,7 +8,7 @@ import {signIn,signOut,useSession} from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 
-function register() {
+function Register() {
   
   const router = useRouter()
 
@@ -155,4 +155,4 @@ console.log("this is the result after the registration operation",commits.result
   )
 }
 
-export default register
+export default Register
