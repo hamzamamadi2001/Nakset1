@@ -19,7 +19,7 @@ async function handelRegister(e){
     password:password,
     username:username,
   }
-  let response = await fetch("http://localhost:3000/api/register",{method: 'POST',
+  let response = await fetch("https://nakset-nargwu9lm-hamzamamadi2001.vercel.app/api/register",{method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },

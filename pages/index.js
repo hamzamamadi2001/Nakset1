@@ -172,7 +172,7 @@ className='text-lg sm:text-4xl font-rubik '
 export async function getServerSideProps(context) {
   console.log("this is context",context.req.headers.host)
  
-    let response = await fetch(process.env.NEXTAUTH_URL+"/api/listCategories")
+    let response = await fetch("https://nakset-nargwu9lm-hamzamamadi2001.vercel.app/api/listCategories")
 
 let result = await response.json()
 console.log("fdsafsfasdfasf",result)
