@@ -54,7 +54,7 @@ export async function getServerSideProps (context) {
  let user ={
   id:context.query
  }
-  let response = await fetch("http://localhost:3000/api/auth/listProducts",{method: 'POST',
+  let response = await fetch("https://master.d2omaoj1s5e329.amplifyapp.com//api/auth/listProducts",{method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },

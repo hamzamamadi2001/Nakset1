@@ -57,9 +57,7 @@ export default NextAuth({
          }
  },
    
-    async redirect({ url, baseUrl }) {
-       return baseUrl
-    },
+     
     async session({ session, user, token }) {
                return      session.user
     },

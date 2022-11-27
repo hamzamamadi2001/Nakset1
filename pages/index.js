@@ -169,9 +169,10 @@ className='text-lg sm:text-4xl font-rubik '
        
         )
 }
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
+  console.log("this is context",context.req.headers.host)
  
-    let response = await fetch("http://localhost:3000/api/auth/listCategories")
+    let response = await fetch("https://master.d2omaoj1s5e329.amplifyapp.com//api/auth/listCategories")
 
 let result = await response.json()
 console.log("fdsafsfasdfasf",result)
