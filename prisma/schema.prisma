@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model User{
+  id Int @unique @id @default(autoincrement())
+  name String @db.Text 
+  email String  @unique 
+  password String @db.Text 
+  provider String @db.Text
+  photo String @default("https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg")  
+  }
+
+
+ model Product {
+  id Int @unique @default(autoincrement())
+  name String @db.Text
+  price Int @db.Int
+  unit String @db.Text
+  photo String
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+ }
+model Category{
+   id Int @unique @default(autoincrement())
+  name String @db.Text
+  photo String @db.Text
+  product  Product[]
+ }
