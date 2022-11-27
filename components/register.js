@@ -19,7 +19,7 @@ async function handelRegister(e){
     password:password,
     username:username,
   }
-  let response = await fetch("https://nakset-hamzamamadi2001.vercel.app/api/auth/register",{method: 'POST',
+  let response = await fetch("http://localhost:3000/api/auth/register",{method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },
@@ -132,7 +132,7 @@ console.log("this is the result after the registration operation",commits.result
 
   </div>
  
-  <Button onClick={ (e)=>{handelRegister(e)}}  gradientDuoTone="greenToBlue">
+  <Button onClick={ async (e)=>{  handelRegister(e)}}  gradientDuoTone="greenToBlue">
       Login
     </Button>
 
