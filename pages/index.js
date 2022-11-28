@@ -171,7 +171,7 @@ className='text-lg sm:text-4xl font-rubik '
 }
 export async function getServerSideProps(context) {
   
-    let response = await fetch("https://nakset-nargwu9lm-hamzamamadi2001.vercel.app/api/register")
+    let response = await fetch("https://nakset.vercel.app/api/listCategories")
 
 let result = await response.json()
  console.log(result)
