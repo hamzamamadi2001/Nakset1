@@ -49,7 +49,7 @@ export default function App() {
     <Navbar.Link onClick={()=>{signOut()}} href="/About">
       About
     </Navbar.Link>
-    <Navbar.Link href="/login">
+    <Navbar.Link href="/sum">
       login
     </Navbar.Link>
     <Navbar.Link href="/Details">
