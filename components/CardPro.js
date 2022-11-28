@@ -8,14 +8,16 @@ import Image from 'next/image'
 function CardCat({src,title,id,price,unit}) {
   return (
     <Link href={{pathname:'./Details',query:{id:id}}}>
-     <Card className='hover:-translate-y-6 duration-500 mx-3 mb-10  w-64 ' imgSrc={src} >
+      
+     <div className='hover:-translate-y-6 duration-500 mx-3   bg-white flex flex-col justify-center items-center rounded-lg' >
+      <Image src={src} width={150} height={200}></Image>
     <h5 className="text-lg text-center font-bold font-oleo tracking-tight text-gray-900 dark:text-white">
     {title}
     </h5>
-    <p className="font-normal text-gray-800  ">
+    <p className="font-normal text-center text-gray-800  ">
       price{price}HUF for {unit}
     </p>
-  </Card>
+  </div>
   </Link>
   )
 }

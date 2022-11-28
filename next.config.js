@@ -1,12 +1,16 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: true,
-}
-module.exports = {
+  optimizeFonts: true,
   images: {
-    domains: ['assets.acme.com'],
-
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+    minimumCacheTTL: 1500000,
   },
-}
-module.exports = nextConfig
+};
+
+module.exports = nextConfig;

@@ -95,7 +95,7 @@ function About() {
   )
 }
 export async function getServerSideProps({req}){
-  const session = await getSession({req})
+  const session = await getSession()
   
 
   if(session){ return{

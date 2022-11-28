@@ -65,7 +65,7 @@ function About() {
  
 
 
-  <Button   onClick={async (e)=>{ e.preventDefault(); signIn("google").then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
+  <Button   onClick={async (e)=>{ e.preventDefault(); signIn("google",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
     <FcGoogle  className="mr-2"></FcGoogle>
      <p>Google</p>
     </Button>
