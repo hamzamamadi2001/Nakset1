@@ -25,7 +25,7 @@ export default function App() {
    <Dropdown
       arrowIcon={false}
       inline={true}
-      label={<Avatar alt="User settings" img={session?session.user:"./logo.png"} rounded={true}/>}
+      label={<Avatar alt="User settings" img={session?session.user.image:"./logo.png"} rounded={true}/>}
       
        
     >
