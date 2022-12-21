@@ -42,7 +42,7 @@ export default NextAuth({
       
  
  
-        if(result ){
+        if(result.length>0){
           if(result.provider !="credentials"){
             return result
           }
