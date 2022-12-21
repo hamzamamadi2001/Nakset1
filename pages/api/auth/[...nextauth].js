@@ -68,7 +68,7 @@ export default NextAuth({
    
      
     async session({ session, user, token }) {
-               return      {se:session.user,ss:user}
+               return     session.user
     },
     
 
