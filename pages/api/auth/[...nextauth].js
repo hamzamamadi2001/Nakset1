@@ -29,11 +29,12 @@ export default NextAuth({
    if(account.provider=="facebook")
       {
        let uuimage=user.image.split('=')[1].split('&')[0]
-   
       }
-        let result =  await   prisma.user.findUnique({ where: {
-        email: user.email?user.email:user.image.split('=')[1].split('&')[0]
-      },})
+       
+      let result =  await   prisma.user.findUnique({ where: {
+        email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
+      }
+      ,})
        
       
       
@@ -50,7 +51,8 @@ export default NextAuth({
       }else{
         console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
-          email:user.email?user.email:user.image.split('=')[1].split('&')[0],
+          email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
+
           name:user.name,
           password:'',
  provider :account.provider,
