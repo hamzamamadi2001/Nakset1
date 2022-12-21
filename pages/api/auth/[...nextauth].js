@@ -51,7 +51,7 @@ export default NextAuth({
       }else{
         console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
-          id: user.id,
+           
           email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
 
           name:user.name,
@@ -71,7 +71,7 @@ export default NextAuth({
    async jwt({token,user}){
     
     if(user){
-      token.id = user.id
+      token.id = user
       token.hello= "what the fuck man !!"
     }
     return token
