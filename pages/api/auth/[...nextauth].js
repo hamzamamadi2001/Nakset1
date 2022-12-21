@@ -67,10 +67,19 @@ export default NextAuth({
       
          }
  },
-   
+   async jwt({token,user}){
+    if(user){
+      token.id = user.id
+      token.hello= "what the fuck man !!"
+    }
+    return token
+   },
      
     async session({ session, user, token }) {
-               return     session.user
+      
+      session.user.id = token.id;
+      session.user.hello = token.hello
+                     return     session.user
     },
     
 
