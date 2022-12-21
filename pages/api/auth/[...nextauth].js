@@ -73,7 +73,7 @@ export default NextAuth({
       email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
     }
     ,})
-    token.id = result
+    token= result
     token.hello= "what the fuck man !!"
   }
   return token
@@ -81,7 +81,7 @@ export default NextAuth({
    
   async session({ session, user, token }) {
     console.log('the user and token are ',user, token)
-    session.user.id = token.id;
+    session.user = token;
     session.user.hello = token.hello
                    return     session.user
   },
