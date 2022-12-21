@@ -42,10 +42,10 @@ export default NextAuth({
  
         if(result ){
           if(result.provider !="credentials"){
-            return result
+            return true
           }
           else{
-            return null
+            return false
           }
             
       }else{
@@ -58,7 +58,7 @@ export default NextAuth({
  provider :account.provider,
  photo :user.image
         },})
-        return newuser
+        return true
       }
  
  
