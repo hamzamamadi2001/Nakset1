@@ -26,7 +26,7 @@ export default NextAuth({
      }else{
 
    
-       
+       console.log("this is the user opject",user)
         let result =  await   prisma.user.findUnique({ where: {
         email: user.email?user.email:user.image
       },})
