@@ -76,7 +76,7 @@ export default NextAuth({
    },
      
     async session({ session, user, token }) {
-      
+      console.log('the user and token are ',user, token)
       session.user.id = token.id;
       session.user.hello = token.hello
                      return     session.user
