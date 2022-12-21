@@ -51,6 +51,7 @@ export default NextAuth({
       }else{
         console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
+          id: user.id,
           email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
 
           name:user.name,
@@ -68,56 +69,12 @@ export default NextAuth({
          }
  },
    async jwt({token,user}){
-    if(account.provider=="credentials"){
+    
+    if(user){
       token.id = user.id
-            return token
-     }else{
-
-   if(account.provider=="facebook")
-      {
-       let uuimage=user.image.split('=')[1].split('&')[0]
-      }
-       
-      let result =  await   prisma.user.findUnique({ where: {
-        email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
-      }
-      ,})
-       
-      
-      
- 
- 
-        if(result ){
-          if(result.provider !="credentials"){
-            token.id = result.id
-            return token
-          }
-          else{
-            return null
-          }
-            
-      }else{
-        console.log("this is the user opject",user.email)
-        let newuser =  await   prisma.user.create({ data: {
-          email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
-
-          name:user.name,
-          password:'',
- provider :account.provider,
- photo :user.image
-        },})
-        token.id = newuser.id
-        return token
-      }
- 
- 
- 
- 
-      
-         }
-     
-      
-      
+      token.hello= "what the fuck man !!"
+    }
+    return token
    },
      
     async session({ session, user, token }) {
