@@ -27,9 +27,11 @@ export default NextAuth({
 
    
        
-      let result =  await   prisma.user.findUnique({ where: {
-        email: user.email
+        let result =  await   prisma.user.findUnique({ where: {
+        email: user.email?user.email:"no email available"
       },})
+       
+      
       
  
  
@@ -44,7 +46,7 @@ export default NextAuth({
       }else{
         console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
-          email:"no email exists",
+          email:user.email,
           name:user.name,
           password:'',
  provider :account.provider,
