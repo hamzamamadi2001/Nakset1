@@ -26,8 +26,11 @@ export default NextAuth({
       return user
      }else{
 
-   
+   if(account.provider=="facebook")
+      {
        let uuimage=user.image.split('=')[1].split('&')[0]
+   
+      }
         let result =  await   prisma.user.findUnique({ where: {
         email: user.email?user.email:uuimage
       },})
