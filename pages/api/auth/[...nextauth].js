@@ -31,9 +31,9 @@ export default NextAuth({
        let uuimage=user.image.split('=')[1].split('&')[0]
    
       }
-        let result =  await   prisma.user.findUnique({ where: {
-        email: user.email?user.email:uuimage,
-        provider:account.provider
+        let result =  await   prisma.user.findMany({ where: {
+        email: {equals:user.email?user.email:uuimage},
+        provider:{equals:account.provider}
 
       },})
        
