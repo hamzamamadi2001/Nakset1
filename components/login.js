@@ -3,7 +3,7 @@ import {  Text } from "@nextui-org/react";
 import { Label,TextInput,Checkbox,Button,Tabs } from "flowbite-react";
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
-import { BsApple } from 'react-icons/bs';
+import { BsTwitter } from 'react-icons/bs';
 import {signIn,signOut} from 'next-auth/react'
 import { useRouter } from 'next/router'
 
@@ -70,9 +70,9 @@ function About() {
      <p>Google</p>
     </Button>
 
-    <Button   className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
-<BsApple color='black' className="mr-2" ></BsApple>
-<p>Apple</p>
+    <Button onClick={async (e)=>{ e.preventDefault(); signIn("twitter",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}}  className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
+<BsTwitter color='#1d9bf0' className="mr-2" ></BsTwitter>
+<p>twitter</p>
 
     </Button>
   <Button onClick={async (e)=>{ e.preventDefault(); signIn("facebook",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">

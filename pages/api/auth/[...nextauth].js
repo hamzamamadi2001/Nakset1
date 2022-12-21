@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import TwitterProvider from "next-auth/providers/twitter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client"
  
@@ -26,9 +27,9 @@ export default NextAuth({
      }else{
 
    
-       console.log("this is the user opject",user)
+       let uuimage=user.image.split('=')[1].split('&')[0]
         let result =  await   prisma.user.findUnique({ where: {
-        email: user.email?user.email:user.image.split('=')[1].split('&')[0]
+        email: user.email?user.email:uuimage
       },})
        
       
@@ -46,7 +47,7 @@ export default NextAuth({
       }else{
         console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
-          email:user.email?user.email:user.image.split('=')[1].split('&')[0],
+          email:user.email?user.email:uuimage,
           name:user.name,
           password:'',
  provider :account.provider,
@@ -76,6 +77,10 @@ export default NextAuth({
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+    }),
+    TwitterProvider({
+      clientId: process.env.TWITTER_CLIENT_ID,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET
     }),
     GoogleProvider({
       
