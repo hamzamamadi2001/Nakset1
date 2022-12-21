@@ -75,7 +75,7 @@ function About() {
 <p>Apple</p>
 
     </Button>
-  <Button  className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
+  <Button onClick={async (e)=>{ e.preventDefault(); signIn("facebook",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
 <BsFacebook color='blue' className="mr-2" ></BsFacebook>
 <p>Facebook</p>
 

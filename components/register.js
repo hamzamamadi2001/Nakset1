@@ -19,6 +19,7 @@ async function handelRegister(e){
     password:password,
     username:username,
   }
+  //rememper to replace the url before uploading it to the server https://nakset.vercel.app/api/register
   let response = await fetch("https://nakset.vercel.app/api/register",{method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'

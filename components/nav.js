@@ -9,7 +9,7 @@ export default function App() {
   return (
 <div>
     <Navbar
-  className="container   shadow-2xl backdrop-filter left-1/2 -translate-x-1/2 mt-2 rounded-r-lg  bg-white bg-opacity-30 backdrop-blur-sm  fixed z-10 "
+  className="container   shadow-2xl backdrop-filter left-1/2 -translate-x-1/2 mt-2 rounded-r-lg  bg-white bg-opacity-30 backdrop-blur-0  fixed z-10 "
   
 >
   <Navbar.Brand href="https://flowbite.com/">

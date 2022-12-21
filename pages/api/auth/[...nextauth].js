@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client"
  
@@ -7,8 +8,8 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
- const client_id='586371651783-6emvrgpkcghil5kn99vafvtt2piraoeq.apps.googleusercontent.com'
-const client_secret='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'
+//  const client_id='586371651783-6emvrgpkcghil5kn99vafvtt2piraoeq.apps.googleusercontent.com'
+// const client_secret='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'
 
 
 export default NextAuth({
@@ -69,11 +70,14 @@ export default NextAuth({
 },
   
   providers: [
-    
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+    }),
     GoogleProvider({
       
-      clientId: client_id,
-      clientSecret: client_secret
+      clientId: process.env.client_id,
+      clientSecret: process.env.client_secret
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
