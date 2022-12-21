@@ -33,9 +33,10 @@ export default NextAuth({
       }
         let result =  await   prisma.user.findMany({ where: {
         email: {equals:user.email?user.email:uuimage},
-        provider:{equals:account.provider}
+        provider:{equals:account.provider},
 
       },})
+      console.log("this is the result",result)
        
       
       
