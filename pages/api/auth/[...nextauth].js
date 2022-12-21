@@ -66,17 +66,72 @@ export default NextAuth({
       
          }
  },
- async jwt({token,user}){
-  if(user){
-    token.id = user
-    token.hello= "what the fuck man !!"
-  }
-  return token
+ async jwt({token,user,account}){
+
+
+
+  if(account.provider=="credentials"){
+      token = user
+   }else{
+
+ if(account.provider=="facebook")
+    {
+     let uuimage=user.image.split('=')[1].split('&')[0]
+    }
+     
+    let result =  await   prisma.user.findUnique({ where: {
+      email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
+    }
+    ,})
+     
+    
+    
+
+
+      if(result ){
+        if(result.provider !="credentials"){
+            token =  result
+        }
+        else{
+          return token
+        }
+          
+    }else{
+      console.log("this is the user opject",user.email)
+      let newuser =  await   prisma.user.create({ data: {
+        email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
+        name:user.name,
+        password:'',
+provider :account.provider,
+photo :user.image
+      },})
+        token = newuser
+    }
+
+
+
+
+    
+       }
+
+
+
+
+
+
+
+
+
+     
+       
+      token.hello= "what the fuck man !!"
+  
+   return token
  },
    
   async session({ session, user, token }) {
     console.log('the user and token are ',user, token)
-    session.user.id = token.id;
+    session.user.id = token;
     session.user.hello = token.hello
                    return     session.user
   },
