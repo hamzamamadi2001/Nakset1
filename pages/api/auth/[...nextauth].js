@@ -31,18 +31,15 @@ export default NextAuth({
        let uuimage=user.image.split('=')[1].split('&')[0]
    
       }
-        let result =  await   prisma.user.findMany({ where: {
-        email: {equals:user.email?user.email:uuimage},
-        provider:{equals:account.provider},
-
+        let result =  await   prisma.user.findUnique({ where: {
+        email: user.email?user.email:uuimage
       },})
-      console.log("this is the result",result)
        
       
       
  
  
-        if(result.length>0){
+        if(result ){
           if(result.provider !="credentials"){
             return result
           }
@@ -51,7 +48,7 @@ export default NextAuth({
           }
             
       }else{
-       
+        console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
           email:user.email?user.email:uuimage,
           name:user.name,
