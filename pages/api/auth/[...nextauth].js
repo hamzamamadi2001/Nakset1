@@ -46,7 +46,7 @@ export default NextAuth({
       }else{
         console.log("this is the user opject",user.email)
         let newuser =  await   prisma.user.create({ data: {
-          email:user.email,
+          email:user.email?user.email:"no email available",
           name:user.name,
           password:'',
  provider :account.provider,
