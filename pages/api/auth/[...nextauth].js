@@ -70,9 +70,7 @@ export default NextAuth({
 
 
 
-  if(account.provider=="credentials"){
-      token.id = user
-   }else{
+  
 
   
      
@@ -93,17 +91,7 @@ export default NextAuth({
           return token
         }
           
-    }else{
-      console.log("this is the user opject",user.email)
-      let newuser =  await   prisma.user.create({ data: {
-        email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
-        name:user.name,
-        password:'',
-provider :account.provider,
-photo :user.image
-      },})
-        token.id = newuser
-    }
+    
 
 
 
