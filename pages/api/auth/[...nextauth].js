@@ -67,7 +67,20 @@ export default NextAuth({
       
          }
  },
-  
+ async jwt({token,user}){
+  if(user){
+    token.id = user
+    token.hello= "what the fuck man !!"
+  }
+  return token
+ },
+   
+  async session({ session, user, token }) {
+    console.log('the user and token are ',user, token)
+    session.user.id = token.id;
+    session.user.hello = token.hello
+                   return     session.user
+  },
     
 
 },pages:{
