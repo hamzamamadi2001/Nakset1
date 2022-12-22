@@ -72,9 +72,32 @@ export default NextAuth({
     let result =  await   prisma.user.findUnique({ where: {
       email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
     }
+    
     ,})
-    token= result
-    token.hello= "what the fuck man !!"
+
+
+    if(result ){
+      if(result.provider !="credentials"){
+        return token = result
+      }
+      else{
+        return null
+      }
+        
+  }else{
+    console.log("this is the user opject",user.email)
+    let newuser =  await   prisma.user.create({ data: {
+      email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
+      name:user.name,
+      password:'',
+provider :account.provider,
+photo :user.image
+    },})
+    return  token= newuser
+  }
+
+
+     
   }
   return token
  },
