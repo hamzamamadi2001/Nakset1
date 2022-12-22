@@ -17,55 +17,55 @@ export default NextAuth({
   secret:"fasdfei;lk;lmciadkfjei;kej;lksjafoi",
   callbacks: {
 
-    async signIn({ user, account, profile, email, credentials }) {
+//     async signIn({ user, account, profile, email, credentials }) {
      
-        console.log("iam in sign in ",user)
+//         console.log("iam in sign in ",user)
         
 
-     if(account.provider=="credentials"){
-      return user
-     }else{
+//      if(account.provider=="credentials"){
+//       return user
+//      }else{
 
-   if(account.provider=="facebook")
-      {
-       let uuimage=user.image.split('=')[1].split('&')[0]
-      }
+//    if(account.provider=="facebook")
+//       {
+//        let uuimage=user.image.split('=')[1].split('&')[0]
+//       }
        
-      let result =  await   prisma.user.findUnique({ where: {
-        email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
-      }
-      ,})
+//       let result =  await   prisma.user.findUnique({ where: {
+//         email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
+//       }
+//       ,})
        
       
       
  
  
-        if(result ){
-          if(result.provider !="credentials"){
-            return result
-          }
-          else{
-            return null
-          }
+//         if(result ){
+//           if(result.provider !="credentials"){
+//             return result
+//           }
+//           else{
+//             return null
+//           }
             
-      }else{
-        console.log("this is the user opject",user.email)
-        let newuser =  await   prisma.user.create({ data: {
-          email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
-          name:user.name,
-          password:'',
- provider :account.provider,
- photo :user.image
-        },})
-        return  {hello:"adfdfadsf",ff:"second choice"}
-      }
+//       }else{
+//         console.log("this is the user opject",user.email)
+//         let newuser =  await   prisma.user.create({ data: {
+//           email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
+//           name:user.name,
+//           password:'',
+//  provider :account.provider,
+//  photo :user.image
+//         },})
+//         return  {hello:"adfdfadsf",ff:"second choice"}
+//       }
  
  
  
  
       
-         }
- },
+//          }
+//  },
  async jwt({token,user,account}){
 
   if(user){
