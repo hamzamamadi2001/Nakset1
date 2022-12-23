@@ -3,7 +3,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { useState, useEffect } from "react";
 
 import {  Text } from "@nextui-org/react";
-import { Carousel } from "flowbite-react";
+import { Button,TextInput,Carousel,Footer } from "flowbite-react";
+import { SocialIcon } from 'react-social-icons';
+
 import Card from '../components/CardCat'
 import Image from 'next/image'
 import {useSession} from 'next-auth/react'
@@ -13,6 +15,7 @@ import { Result } from "postcss";
 
 export default function Home({result}) 
 {
+  const [EmailList, setEmailList] = useState("");
 console.log("this is result",result)
   
 
@@ -104,7 +107,7 @@ className='text-lg sm:text-4xl font-rubik '
 
 <section className='container mx-auto flex flex-col justify-between items-center  text-center '>
 <div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
-<p className='text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>How it works</p>
+<p className= 'text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>How it works</p>
 </div>
 
 <div className='flex flex-col sm:flex-row container mx-auto justify-center items-center align-middle '>
@@ -153,9 +156,9 @@ className='text-lg sm:text-4xl font-rubik '
 
 <section className='bg-gray-300   mx-auto break-all  '>
 <div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
-<p className='text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our categories</p>
+<p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our categories</p>
 </div>
-<div className='flex flex-col sm:flex-row-reverse flex-wrap justify-evenly items-center'>
+<div className='flex w-full flex-row sm:flex-row-reverse flex-wrap justify-evenly items-center'>
   
 {result.map((res) => (
 <Card key={res.id} src={res.photo}  title={res.name} id={res.id}></Card>
@@ -164,6 +167,56 @@ className='text-lg sm:text-4xl font-rubik '
       ))}
 </div>
 </section>
+
+<section className='bg-gray-100     break-all  '>
+<div className='text-center   flex flex-col justify-center items-center'>
+<p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our Mailing List</p>
+</div>
+<p className="text-center text-gray-600">Be the first to hear about pormotions, upcaming sales, and product events</p>
+ <div className="flex-col flex-wrap container mx-auto mt-10  2/4 flex md:flex-row justify-center">
+         
+        <TextInput
+        className="md:w-1/2"
+          id="Email"
+          type="Email"
+          placeholder="your Email"
+          required={true}
+          shadow={true}
+          onChange={(e)=>{setEmailList(e.target.value)}}
+        />      <Button   className=''  >
+ <p>Join now</p>
+
+    </Button>
+      </div>
+
+ </section>
+
+
+ <section className='bg-white   mx-auto break-all  '>
+<div className='text-center   flex flex-col justify-center items-center'>
+<p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Social</p>
+</div>
+<p className="text-center text-gray-600">you can find us here </p>
+          
+ <div className="  flex flex-wrap  content-center place-items-center self-center justify-center   sm:mt-0 sm:justify-center items-center  ">
+         <SocialIcon className="m-3" url="https://twitter.com" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://facebook.com" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://www.linkedin.com/in/hamza-mammadi-303a35247/" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://www.instagram.com" ></SocialIcon>
+         <SocialIcon  className="m-3" url="https://www.tiktok.com" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://hu.pinterest.com/" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://www.twitch.com/" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://www.whatsapp.com/" ></SocialIcon>
+
+
+
+
+
+
+
+       </div>
+
+ </section>
 
 </div>
        
