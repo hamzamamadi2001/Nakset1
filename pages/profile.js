@@ -6,10 +6,10 @@ import Image from'next/image'
 
 function About() {
   const {data:session}= useSession()
-  console.log("this is the session",session)
+  console.log("this is the profile",session)
   return (
     <div className="container mx-auto   w-full h-screen">
-   <div className='w-full flex justify-center items-center'><Image src={session.photo}></Image></div>  
+   <div className='w-full flex justify-center items-center'><Image src={session?session.photo:"nothink"}></Image></div>  
       <p className='text-center text-3xl font-mono'>user information</p>
       <div className='bg-slate-300' > 
       <div className='w-full h-1/2 grid grid-cols-2  p-6 '>
