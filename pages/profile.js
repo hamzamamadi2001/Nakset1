@@ -9,8 +9,7 @@ function About() {
   console.log("this is the profile",session)
   return (
     <div className="container mx-auto   w-full h-screen">
-   <div className='w-full flex justify-center items-center'><Image src={session?session.photo:"nothink"}></Image></div>  
-      <p className='text-center text-3xl font-mono'>user information</p>
+       <p className='text-center text-3xl font-mono'>user information</p>
       <div className='bg-slate-300' > 
       <div className='w-full h-1/2 grid grid-cols-2  p-6 '>
       <div className='w-1/2'>
@@ -23,7 +22,7 @@ function About() {
         <TextInput
           id="username"
           type="username"
-          placeholder={session.name}
+          placeholder='{session.name}'
           required={true}
           shadow={true}
           disabled={true}
@@ -45,7 +44,7 @@ value="hamza mammadi"
           required={true}
           shadow={true}
           disabled={true}
-          value={session.email}
+          value='{session.email}'
           onChange={(e)=>{setUsername(e.target.value)}}
         />
       </div>
@@ -63,7 +62,7 @@ value="hamza mammadi"
           required={true}
           shadow={true}
           disabled={true}
-value={!session.id?"0792966687":"111"}
+value="ll;k;"
           onChange={(e)=>{setUsername(e.target.value)}}
         />
       </div>
