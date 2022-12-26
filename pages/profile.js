@@ -5,8 +5,9 @@ import { Label,TextInput,Checkbox,Button } from "flowbite-react";
 import Image from'next/image'
 
 function About() {
-  const {data:session}= useSession()
-  console.log("this is the profile",session)
+  const session =  getSession().then((session) =>  console.log("this is the profile",session)
+  )
+  // const data={he:session.data}
   return (
     <div className="container mx-auto   w-full h-screen">
        <p className='text-center text-3xl font-mono'>user information</p>
