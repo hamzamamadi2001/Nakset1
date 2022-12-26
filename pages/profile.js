@@ -9,7 +9,9 @@ function About() {
   console.log("testing new item here ",session)
   return (
     <div className="container mx-auto   w-full h-screen">
-<Avatar className="w-10 h-10 mx-2"   alt="User settings" img={session.photo} rounded={true} />
+      <div className='flex justify-center items-center rounded-full'>
+        <Image src="/logo.png"  width="300" height="300"></Image>
+       </div>
        <p className='text-center text-3xl font-mono'>user information</p>
       <div className='bg-slate-300' > 
       <div className='w-full h-1/2 grid grid-cols-2  p-6 '>
@@ -23,11 +25,11 @@ function About() {
         <TextInput
           id="username"
           type="username"
-          placeholder='{session.name}'
+          placeholder="your name"
           required={true}
           shadow={true}
           disabled={true}
-value="hamza mammadi"
+value={session.name}
           onChange={(e)=>{setUsername(e.target.value)}}
         />
       </div>
@@ -45,7 +47,7 @@ value="hamza mammadi"
           required={true}
           shadow={true}
           disabled={true}
-          value='{session.email}'
+          value={session.email}
           onChange={(e)=>{setUsername(e.target.value)}}
         />
       </div>
