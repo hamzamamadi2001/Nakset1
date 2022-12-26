@@ -1,6 +1,6 @@
 import React from 'react'
 import {useSession,getSession} from 'next-auth/react'
-import { Label,TextInput,Checkbox,Button } from "flowbite-react";
+import { Label,TextInput,Checkbox,Button,Avatar } from "flowbite-react";
 
 import Image from'next/image'
 
@@ -9,7 +9,8 @@ function About() {
   console.log("testing new item here ",session)
   return (
     <div className="container mx-auto   w-full h-screen">
-<Avatar className="w-10 h-10 mx-2"   alt="User settings" img={session.photo} rounded={true} />       <p className='text-center text-3xl font-mono'>user information</p>
+<Avatar className="w-10 h-10 mx-2"   alt="User settings" img={session.photo} rounded={true} />
+       <p className='text-center text-3xl font-mono'>user information</p>
       <div className='bg-slate-300' > 
       <div className='w-full h-1/2 grid grid-cols-2  p-6 '>
       <div className='w-1/2'>
