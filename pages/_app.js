@@ -5,14 +5,13 @@ import { NextUIProvider } from '@nextui-org/react';
 import {SessionProvider} from 'next-auth/react'
 import Head from 'next/head'
 import { Provider } from 'react-redux';
-import {persistor,store} from '../store'
+import  store  from '../store'
 import { PersistGate } from 'redux-persist/integration/react';
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store ={store}>
-      <PersistGate loading={null} persistor={persistor}>
-    <SessionProvider session={pageProps.session}>
+     <SessionProvider session={pageProps.session}>
       <Head >
         <meta charSet="utf-8" />
 
@@ -26,8 +25,7 @@ function MyApp({ Component, pageProps }) {
 
 <Fot></Fot>
     </SessionProvider>
-      </PersistGate>
-            </Provider>)
+             </Provider>)
           }
 
 export default MyApp

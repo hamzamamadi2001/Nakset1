@@ -65,17 +65,20 @@ function About() {
  
 
 
-  <Button   onClick={async (e)=>{ e.preventDefault(); signIn("google",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
+  <Button   onClick={async (e)=>{ e.preventDefault(); signIn("google",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' outline={true}
+      color="light">
     <FcGoogle  className="mr-2"></FcGoogle>
      <p>Google</p>
     </Button>
 
-    <Button onClick={async (e)=>{ e.preventDefault(); signIn("twitter",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}}  className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
+    <Button onClick={async (e)=>{ e.preventDefault(); signIn("twitter",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}}  className='flex flex-row-reverse justify-around items-center w-full' outline={true}
+     color="light">
 <BsTwitter color='#1d9bf0' className="mr-2" ></BsTwitter>
 <p>twitter</p>
 
     </Button>
-  <Button onClick={async (e)=>{ e.preventDefault(); signIn("facebook",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' gradientDuoTone="greenToBlue">
+  <Button onClick={async (e)=>{ e.preventDefault(); signIn("facebook",{callbackUrl:"https://nakset.vercel.app"}).then((res)=>{console.log(res)})}} className='flex flex-row-reverse justify-around items-center w-full' outline={true}
+      color="light">
 <BsFacebook color='blue' className="mr-2" ></BsFacebook>
 <p>Facebook</p>
 

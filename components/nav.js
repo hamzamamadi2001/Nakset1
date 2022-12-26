@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 export default function App() {
-  const count = useSelector((state) => state.counter.value)
+  const count = useSelector((state) => state.counter.counter)
 
   const {data:session}= useSession()
   console.log("this is the session",session)
