@@ -1,6 +1,7 @@
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useState, useEffect } from "react";
+import { getToken } from "next-auth/jwt"
 
 import {  Text } from "@nextui-org/react";
 import { Button,TextInput,Carousel,Footer } from "flowbite-react";

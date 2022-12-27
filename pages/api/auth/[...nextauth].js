@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth'
+import { getToken } from "next-auth/jwt"
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
@@ -23,7 +24,7 @@ export default NextAuth({
         
 
 //      if(account.provider=="credentials"){
-//       return user
+//       return {user:user}
 //      }else{
 
 //    if(account.provider=="facebook")
@@ -42,7 +43,7 @@ export default NextAuth({
  
 //         if(result ){
 //           if(result.provider !="credentials"){
-//             return result
+//             return {user:result}
 //           }
 //           else{
 //             return null
@@ -52,12 +53,13 @@ export default NextAuth({
 //         console.log("this is the user opject",user.email)
 //         let newuser =  await   prisma.user.create({ data: {
 //           email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
+
 //           name:user.name,
 //           password:'',
 //  provider :account.provider,
 //  photo :user.image
 //         },})
-//         return  {hello:"adfdfadsf",ff:"second choice"}
+//         return {user:newuser}
 //       }
  
  
@@ -66,54 +68,31 @@ export default NextAuth({
       
 //          }
 //  },
- async jwt({token,user,account}){
 
-  if(user){
-    let result =  await   prisma.user.findUnique({ where: {
-      email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
+   async jwt({token,user,account,profile,isNewUser}){
+    if(user){
+      token = user
+      console.log("this is the token",account.access_token,profile,isNewUser)
+      token.hello= [account,profile,isNewUser]
     }
-    
-    ,})
-
-
-    if(result ){
-      if(result.provider !="credentials"){
-        return token = result
-      }
-      else{
-        return null
-      }
-        
-  }else{
-    console.log("this is the user opject",user.email)
-    let newuser =  await   prisma.user.create({ data: {
-      email: account.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email,
-      name:user.name,
-      password:'',
-provider :account.provider,
-photo :user.image
-    },})
-    return  token= newuser
-  }
-
-
+    return token
+   },
      
-  }
-  return token
- },
-   
-  async session({ session, user, token }) {
-    console.log('the user and token are ',user, token)
-    session.user = token;
-    session.user.hello = token.hello
-                   return     session.user
-  },
+    async session({ session, user, token }) {
+      console.log('the user and token are ')
+      session.user  = token ;
+      session.user.token = token.hello
+                     return     session
+    },
     
 
 },pages:{
   signIn:"./sum"
 },
-  
+session: {
+  jwt: true,
+  maxAge: 30 * 24 * 60 * 60 // the session will last 30 days
+},
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
@@ -159,7 +138,7 @@ photo :user.image
           console.log("i am in the credential_______________________s")
              if(result && result.password==credentials.password && result.provider=="credentials"){
                  
-                   return {id:result.id,name:result.name,email:result.email,image:result.photo}
+                   return result
                  
                  }
              else null
