@@ -70,19 +70,74 @@ export default NextAuth({
 //  },
 
    async jwt({token,user,account,profile,isNewUser}){
-    if(user){
-      token = user
-      console.log("this is the token",account.access_token,profile,isNewUser)
-      token.hello= [account,profile,isNewUser]
-    }
-    return token
+    console.log("this is jwt ",user,token,profile,account) 
+ 
+
+        if(token.provider=="credentials")
+        {
+         
+          return token
+          
+        }
+        else{
+
+             if(token.provider=="facebook")
+                {
+                 let uuimage=user.image.split('=')[1].split('&')[0]
+                }
+                 
+                let result =  await   prisma.user.findUnique({ where: {
+                  email: token.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
+                }
+                ,})
+                 
+                
+                
+           
+           
+                  if(result ){
+                    
+                    return result
+                    
+                   
+                      
+                }else{
+                  console.log("this is the user opject",user.email)
+                  let newuser =  await   prisma.user.create({ data: {
+                    email: token.provider=="facebook"?user.image.split('=')[1].split('&')[0]:token.email,
+          
+                    name:token.name,
+                    password:'',
+           provider :token.provider,
+           photo :token.image
+                  },})
+                   
+                  return newuser
+                }
+           
+           
+           
+           
+                
+                   }
+
+
+ 
+      
+   
+     
    },
      
     async session({ session, user, token }) {
-      console.log('the user and token are ')
-      session.user  = token ;
-      session.user.token = token.hello
-                     return     session
+      console.log('the user and token are ',user,session,token)
+      session.user  = token;
+      
+
+
+
+      // session.test = "here we put hte token"
+      // session.user.token = token.test
+                     return      session 
     },
     
 
@@ -90,6 +145,7 @@ export default NextAuth({
   signIn:"./sum"
 },
 session: {
+  strategy:"jwt",
   jwt: true,
   maxAge: 30 * 24 * 60 * 60 // the session will last 30 days
 },
