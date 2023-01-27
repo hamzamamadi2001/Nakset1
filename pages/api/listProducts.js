@@ -2,8 +2,7 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
  export default async function handler(req ,res ){
-   console.log("thus is from back",req.body.id)
-  
+   
  
 
    const categories = await prisma.category.findMany({select:{id:true,name:true}}).finally(async()=>{prisma.$disconnect()})
@@ -14,7 +13,7 @@ const prisma = new PrismaClient()
   const products = await prisma.product.findMany({where:{city:citys[0].id}}).finally(async()=>{prisma.$disconnect()})
   
  
-     return res.status(200).json([categories,countrys,citys,products])              
+     return res.status(200).json({data:[categories,countrys,citys,products]})              
 
   
   

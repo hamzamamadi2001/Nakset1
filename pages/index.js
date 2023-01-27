@@ -442,8 +442,10 @@ export async function getServerSideProps(context) {
     let response = await fetch("http://localhost:3000/api/listProducts")
 
 
-let result = await response.json()
-console.log(result)
+let result2 = await response.json()
+console.log(result2)
+ let result=
+ [ result2.data[0],result2.data[1],result2.data[2],result2.data[3]]
  
 
 return {
