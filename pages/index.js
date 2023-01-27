@@ -443,8 +443,7 @@ export async function getServerSideProps(context) {
 
 
 let result = await response.json()
- console.log(result)
-
+ 
 
 return {
   props: { result }, // will be passed to the page component as props

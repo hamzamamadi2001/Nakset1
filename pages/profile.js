@@ -103,10 +103,10 @@ setOldAdress(result[2])
 
   return (
     <div className="container mx-auto    ">
-      <div className='flex flex-col  justify-center items-center self-center w-full'>
+      {/* <div className='flex flex-col  justify-center items-center self-center w-full'>
         {session?<img src={session.photo} width="300" height="300"></img>:<></>}
         {session?<p className='font-bold text-4xl bg-blue-400 w-screen text-center'>{session.name}</p>:<></>}
-       </div>
+       </div> */}
        <p className='text-center text-3xl font-mono'>user information</p>
       <div className='bg-slate-300' > 
       <div className='w-full h-1/2 grid grid-cols-1 md:grid-cols-2   p-6 '>
@@ -124,7 +124,7 @@ setOldAdress(result[2])
           required={true}
           shadow={true}
           disabled={true}
-value={session?session.name:""}
+value={""}
           onChange={(e)=>{setUsername(e.target.value)}}
         />
       </div>
@@ -142,7 +142,7 @@ value={session?session.name:""}
           required={true}
           shadow={true}
           disabled={true}
-          value={session?session.email:""}
+          value={""}
           onChange={(e)=>{setUsername(e.target.value)}}
         />
       </div>

@@ -13,7 +13,7 @@ import { FiPackage } from 'react-icons/fi';
 
 
 import Bay from './pay'
-import {useSession,getSession} from 'next-auth/react'
+// import {useSession,getSession} from 'next-auth/react'
 import {Table,Timeline}from "flowbite-react";
 import Image from 'next/image';
 
@@ -23,7 +23,7 @@ import Image from 'next/image';
 ImLocation2
 
 function About() {
-  const {data:session,status}= useSession()
+  // const {data:session,status}= useSession()
 
     const items = useSelector((state) => state.counter.items)
     const symbol = useSelector((state) => state.counter.Symbol)
@@ -41,7 +41,7 @@ const [order, setRealOrders] = useState(null);
     
    
  
-      if(session){
+      if(1){
         async function fetchText() {
         let response = await fetch('https://nakset.vercel.app/api/orders',{method: 'POST',
         headers: {
@@ -62,7 +62,7 @@ const [order, setRealOrders] = useState(null);
       }
       
       
-      }, [session]);
+      }, []);
    
 
  
