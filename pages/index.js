@@ -217,7 +217,7 @@ className='text-lg sm:text-4xl font-rubik '
         {result[1].map((res) => (
 
 
-          <Tab icon={ <ReactCountryFlag
+          <Tab icon={ <ReactCountryFlag key={res.id}
             className=""
             onClick={async()=>{ await handleChangeCountry(res.id)}}
                                       countryCode={res.name}
@@ -265,11 +265,11 @@ className='text-lg sm:text-4xl font-rubik '
 
         {result[0].map((res,index) =>{
           if(index==0)
-          return(  <option value={res.id}>{res.name}</option>
+          return(  <option key={res.id} value={res.id}>{res.name}</option>
           )
           else
           return (
-           <option value={res.id}>{res.name}</option>
+           <option key={res.id} value={res.id}>{res.name}</option>
 
                   )})}
                   </select>
@@ -299,11 +299,11 @@ className='text-lg sm:text-4xl font-rubik '
 
         {city.map((res,index) =>{
           if(index==0)
-          return(  <option value={res.id}>{res.name}</option>
+          return(  <option key={res.id} value={res.id}>{res.name}</option>
           )
           else
           return (
-           <option  value={res.id}>{res.name}</option>
+           <option key={res.id}  value={res.id}>{res.name}</option>
 
                   )})}
                   </select>)}
