@@ -48,14 +48,11 @@ const [order, setRealOrders] = useState(null);
           'Content-Type': 'application/json;charset=utf-8'
         }
        });
-      
-        console.log(response.status); // 200
-        console.log(response.statusText); // OK
+       
       
         if (response.status === 200) {
             let data = await response.json();
-           console.log("thisi is the data of orders",data)
-           setOrders(data)
+            setOrders(data)
            
              
         }
