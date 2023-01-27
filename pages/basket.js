@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react'
 import { Button} from "flowbite-react";
-import {useSession} from 'next-auth/react'
+import {useSession,getSession} from 'next-auth/react'
 import { AiFillMinusCircle } from 'react-icons/ai';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import CardBasket from '../components/CartBbasket'
