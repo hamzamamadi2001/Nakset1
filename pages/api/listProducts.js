@@ -5,14 +5,14 @@
  
 
    const categories = await client.category.findMany({select:{id:true,name:true}}) 
-   const countrys = await client.countrys.findMany({take:10}) 
-   const citys = await client.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}) 
+    
+   const citys = await client.citys.findMany({where:{country:1},select:{id:true,name:true}}) 
 
 
   const products = await client.product.findMany({where:{city:citys[0].id}})
   
  
-     return res.status(200).json({data:[categories,countrys,citys,products]})              
+     return res.status(200).json({data:[categories,citys,products]})              
 
   
   
