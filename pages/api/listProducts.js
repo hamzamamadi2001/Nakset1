@@ -4,15 +4,15 @@
    
  
 
-  //  const categories = await client.category.findMany({select:{id:true,name:true}}) 
-  //  const countrys = await client.countrys.findMany() 
-  //  const citys = await client.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}) 
+   const categories = await client.category.findMany({select:{id:true,name:true}}) 
+   const countrys = await client.countrys.findMany() 
+   const citys = await client.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}) 
 
 
-  // const products = await client.product.findMany({where:{city:citys[0].id}})
+  const products = await client.product.findMany({where:{city:citys[0].id}})
   
  
-     return res.status(200).json({data:[[],[],[],[]]})              
+     return res.status(200).json({data:[categories,countrys,citys,products]})              
 
   
   
