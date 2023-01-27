@@ -2,10 +2,7 @@ import React from 'react'
 import {  Text } from "@nextui-org/react";
  import Login from '../components/login'
 import Register from '../components/register'
-import { getToken } from "next-auth/jwt"
-import { unstable_getServerSession } from "next-auth/next"
-import { authOptions } from "./api/auth/[...nextauth]"
-import { useSession } from "next-auth/react"
+
 function About() {
     const [openTab, setOpenTab] = React.useState(1);
 
