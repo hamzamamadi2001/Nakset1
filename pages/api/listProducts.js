@@ -5,7 +5,7 @@
  
 
    const categories = await client.category.findMany({select:{id:true,name:true}}) 
-   const countrys = await client.countrys.findMany() 
+   const countrys = await client.countrys.findMany({take:10}) 
    const citys = await client.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}) 
 
 
