@@ -439,10 +439,11 @@ className='text-lg sm:text-4xl font-rubik '
 export async function getServerSideProps(context) {
  // console.log("this is context",context.req.headers.cookie)
   //replace the url with this before uploading it to  the server "https://nakset.vercel.app/api/listCategories"
-    let response = await fetch("https://nakset.vercel.app/api/listProducts")
+    let response = await fetch("http://localhost:3000/api/listProducts")
 
 
 let result = await response.json()
+console.log(result)
  
 
 return {

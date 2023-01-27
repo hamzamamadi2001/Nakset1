@@ -61,7 +61,6 @@ export default async (req, res) => {
     
   } else {
     // Not Signed in
-    res.status(401)
+    res.status(401).json("you dont have the permission to access")
   }
-  res.end()
-}
+ }
