@@ -1,21 +1,19 @@
 import NextAuth from 'next-auth'
-import { getToken } from "next-auth/jwt"
-import GoogleProvider from "next-auth/providers/google";
+ import GoogleProvider from "next-auth/providers/google";
+import {compare} from "bcrypt"
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client"
- 
+  
 
 
 const prisma = new PrismaClient()
 
 //  const client_id='586371651783-6emvrgpkcghil5kn99vafvtt2piraoeq.apps.googleusercontent.com'
 // const client_secret='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'
-
-
-export default NextAuth({
-  secret:"fasdfei;lk;lmciadkfjei;kej;lksjafoi",
+export const authOptions = {
+  secret:process.env.NEXTAUTH_SECRET,
   callbacks: {
 
 //     async signIn({ user, account, profile, email, credentials }) {
@@ -75,43 +73,47 @@ export default NextAuth({
 
         if(token.provider=="credentials")
         {
-         
-          return token
+          delete token.password
+          delete token.provider
+           
+         return token
           
         }
         else{
 
-             if(token.provider=="facebook")
-                {
-                 let uuimage=user.image.split('=')[1].split('&')[0]
-                }
+              
                  
                 let result =  await   prisma.user.findUnique({ where: {
-                  email: token.provider=="facebook"?user.image.split('=')[1].split('&')[0]:user.email
+                  email: token.provider=="facebook"?token.image.split('=')[1].split('&')[0]:token.email
                 }
-                ,})
+                ,}).finally(async()=>{prisma.$disconnect()})
                  
                 
                 
            
            
                   if(result ){
+                    delete result.password
+                    delete result.provider
                     
                     return result
                     
                    
                       
                 }else{
-                  console.log("this is the user opject",user.email)
+                  console.log("this is the user opject",token.email)
                   let newuser =  await   prisma.user.create({ data: {
-                    email: token.provider=="facebook"?user.image.split('=')[1].split('&')[0]:token.email,
+                    email: token.provider=="facebook"?token.image.split('=')[1].split('&')[0]:token.email,
           
                     name:token.name,
                     password:'',
-           provider :token.provider,
-           photo :token.image
-                  },})
-                   
+           provider :token.provider?token.provider:account.provider,
+           photo :token.image?token.image:token.picture
+                  },}).finally(async()=>{prisma.$disconnect()})
+                   delete newuser.password
+                    delete newuser.provider
+                    
+
                   return newuser
                 }
            
@@ -130,7 +132,11 @@ export default NextAuth({
      
     async session({ session, user, token }) {
       console.log('the user and token are ',user,session,token)
-      session.user  = token;
+
+       
+       session={id:token.id,name:token.name,photo:token.photo}
+      
+
       
 
 
@@ -185,14 +191,18 @@ session: {
            
           let result =  await   prisma.user.findUnique({ where: {
             email: credentials.email
-          },})
-         console.log(result)
+          },}).finally(async()=>{prisma.$disconnect()})
+         console.log(result,credentials.password)
          console.log(typeof(result.password))
 
+         const checkpass = await compare(credentials.password, result.password).then(function(result) {
+          return result
+      });
+console.log("this is check password result",checkpass)
     
     
           console.log("i am in the credential_______________________s")
-             if(result && result.password==credentials.password && result.provider=="credentials"){
+             if(result && checkpass && result.provider=="credentials"){
                  
                    return result
                  
@@ -214,7 +224,7 @@ session: {
 
 
 
+}
 
 
-
-})
+export default NextAuth(authOptions)

@@ -9,8 +9,10 @@ import { adjustQuantity, removeProduct} from '../slices/CounterSlice'
 import {Table}from "flowbite-react";
 
 
-function About({price,src,name,currency,baseQuantity,weight,idx,quantity}) {
+function About({price,src,name,currency,baseQuantity,weight,idx,quantity,currencyValue}) {
     const gprice = useSelector((state) => state.counter.items[idx].price)
+   
+
 
    const dispatch = useDispatch()
     const [value, setValue] = useState(quantity);
@@ -51,7 +53,7 @@ if(Number(result) <=1)
       <p className='text-black text-base text-center '>{name}</p>
       </Table.Cell>
       <Table.Cell>
-      <p className='text-black text-2xl    text-center'>{parseFloat(price)+currency+" for "+baseQuantity+" "+weight}</p>
+      <p className='text-black text-2xl    text-center'>{(Math.round( parseFloat(price)*currencyValue* 100) / 100).toFixed(2)+currency+" for "+baseQuantity+" "+weight}</p>
 
       </Table.Cell>
       <Table.Cell className='flex justify-center  items-center'>
@@ -60,13 +62,13 @@ if(Number(result) <=1)
     className='w-24'
         type="text"
         placeholder="quantity"
-        value={value*baseQuantity}
+        value={(Math.round(value*baseQuantity* 100) / 100).toFixed(2)}
         onChange={handleChange}
       />
       <AiFillPlusCircle onClick={()=>{  dispatch(adjustQuantity({quantity:value+1,idx:idx}));setValue(value+1);}}   size={30}></AiFillPlusCircle>
        </Table.Cell>
       <Table.Cell>
-      <p className=' text-black text-2xl  text-center'>{gprice+currency}</p>
+      <p className=' text-black text-2xl  text-center'>{(Math.round( gprice*currencyValue* 100) / 100).toFixed(2)+currency}</p>
       </Table.Cell>
       <Table.Cell className='flex justify-center  items-center   ' >
 

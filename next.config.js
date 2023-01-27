@@ -1,7 +1,27 @@
-const nextConfig = {
-  reactStrictMode: true,
+const nextTranslate = require('next-translate')
+// const nextConfig = {
+//   reactStrictMode: true,
+//   swcMinify: true,
+//   optimizeFonts: true,
+   
+  
+//   images: {
+//     remotePatterns: [
+//       {
+//         protocol: "https",
+//         hostname: "res.cloudinary.com",
+//       },
+//     ],
+//     minimumCacheTTL: 1500000,
+//   },
+// };
+module.exports = nextTranslate({
+   
+  reactStrictMode: false,
   swcMinify: true,
   optimizeFonts: true,
+   
+  
   images: {
     remotePatterns: [
       {
@@ -11,6 +31,5 @@ const nextConfig = {
     ],
     minimumCacheTTL: 1500000,
   },
-};
-
-module.exports = nextConfig;
+})
+//  module.exports = nextConfig;

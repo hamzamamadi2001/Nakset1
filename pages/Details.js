@@ -1,8 +1,7 @@
 import React from 'react'
-import { Label,TextInput } from "flowbite-react";
+import {  TextInput } from "flowbite-react";
 import { BiSearchAlt } from 'react-icons/bi';
-import { useRouter } from 'next/router' 
- import  Card from '../components/CardPro'
+  import  Card from '../components/CardPro'
    
 function About({result}) {
  
@@ -35,7 +34,7 @@ function About({result}) {
     <div className='flex flex-col sm:flex-row-reverse flex-wrap justify-evenly items-center'>
   
   {result.map((res) => (
-  <Card key={res.id} src={res.photo}  title={res.name} unit={res.unit} price={res.price} id={res.id}></Card>
+  <Card key={res.id} src={res.photo}  title={res.name} unit={res.unit} price={res.price} id={res.id} baseQuantity={res.baseQuantity}></Card>
   
            
         ))}
@@ -54,7 +53,7 @@ export async function getServerSideProps (context) {
  let user ={
   id:context.query
  }
-  let response = await fetch("https://nakset.vercel.app/api/listProducts",{method: 'POST',
+  let response = await fetch("http://localhost:3000/api/listProducts",{method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },

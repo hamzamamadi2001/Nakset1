@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
  
 
     
-  const categories = await prisma.category.findMany()
+  const categories = await prisma.category.findMany().finally(async()=>{prisma.$disconnect()})
   console.log(categories)
   console.log("i am in cat",categories)
 

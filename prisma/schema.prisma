@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,29 +6,71 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model User{
-  id Int @unique @id @default(autoincrement())
-  name String @db.Text 
-  email String  @unique 
-  password String @db.Text 
+
+model User {
+  id       Int    @id @unique @default(autoincrement())
+  name     String @db.Text
+  email    String @unique
+  password String @db.Text
   provider String @db.Text
-  photo String @default("https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg")  
-  }
+  photo    String @default("https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg")
+}
 
+model Product {
+  id           Int      @unique @default(autoincrement())
+  name         String   @db.Text
+  price        Int
+  unit         String   @db.Text
+  photo        String
+  categoryId   Int
+  baseQuantity Float?
+  city         Int?
+  category     Category @relation(fields: [categoryId], references: [id])
 
- model Product {
-  id Int @unique @default(autoincrement())
-  name String @db.Text
-  price Int @db.Int
-  unit String @db.Text
-  photo String
-  category Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
+  @@index([categoryId], map: "Product_categoryId_fkey")
+}
 
- }
-model Category{
-   id Int @unique @default(autoincrement())
-  name String @db.Text
-  photo String @db.Text
-  product  Product[]
- }
+model Category {
+  id      Int       @unique @default(autoincrement())
+  name    String    @db.Text
+  photo   String    @db.Text
+  product Product[]
+}
+
+model Order {
+  id            Int     @unique @default(autoincrement())
+  userId        Int
+  order         String  @db.LongText
+  date          String
+  payed         Boolean @default(false)
+  currency      String
+  currencyValue Float
+  status        String
+  total         Float
+}
+
+model address {
+  id       Int     @unique(map: "id") @default(autoincrement())
+  country  String? @db.Text
+  province String? @db.Text
+  city     String? @db.Text
+  postal   String? @db.Text
+  phone    String? @db.Text
+  street   String? @db.Text
+}
+
+model Citys {
+  id      Int     @id @unique(map: "id") @default(autoincrement())
+  name    String? @db.Text
+  country Int?
+}
+
+model Countrys {
+  id   Int     @id
+  name String? @db.Text
+}
+
+model NotRegistredEmails {
+  id    Int     @id @default(autoincrement())
+  email String? @db.Text
+}

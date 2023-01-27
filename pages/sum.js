@@ -2,29 +2,30 @@ import React from 'react'
 import {  Text } from "@nextui-org/react";
  import Login from '../components/login'
 import Register from '../components/register'
-import {getSession} from 'next-auth/react'
-
+import { getToken } from "next-auth/jwt"
+import { unstable_getServerSession } from "next-auth/next"
+import { authOptions } from "./api/auth/[...nextauth]"
+import { useSession } from "next-auth/react"
 function About() {
     const [openTab, setOpenTab] = React.useState(1);
 
   return (
-   <div className="w-screen h-screen bg-red-200 bg-login bg-auto flex flex-row justify-center items-center">
-
-<div className='   w-full h-full bg-black flex flex-col justify-center items-center  bg-opacity-30 backdrop-blur-sm'>
+ 
+<div className=' min-h-screen w-screen    bg-gradient-to-r from-cyan-500 to-blue-300 flex flex-col justify-center items-center   '>
 <Text
-    className='text-lg m-10 sm:text-2xl lg:text-4xl bg-slate-50 font-tar '
+    className='text-lg my-5 sm:text-2xl lg:text-4xl bg-slate-50 h-16  '
      h6
      size={60}
         css={{
-          textGradient: "45deg, $blue600 -20%, $pink600 50%",
+          textGradient: "45deg, $gray600 -20%, $white600 50%",
         }}
         weight="bold"
       >
-        Register now
+        welcome to nakset
       </Text>
 
 
-      <>
+      <div >
       <div className="flex flex-wrap">
         <div className="w-full">
           <ul
@@ -86,33 +87,30 @@ function About() {
           </div>
         </div>
       </div>
-    </>
-
+    </div>
 
 
 </div>
-   </div>
+    
   )
 }
-export async function getServerSideProps({req}){
-  const session = await getSession()
-  
 
-  if(session){ return{
-    redirect: {
-      permanent: false,
-      destination: '/',
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
 
-  }}
-  
-}else{
-  
+  if (session) {
     return {
-      props: {
-        session
-      }
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
-  
-}
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
 }
 export default About

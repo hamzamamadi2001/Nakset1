@@ -1,0 +1,13 @@
+{
+    "locales": ["en", "ar", "de","fr","tr"],
+  "defaultLocale": "en",
+  "localeDetection": false,
+
+    "pages": {
+      "*": ["text","common"],
+      "/": ["text","common"]
+      
+    }
+    
+     
+  }
