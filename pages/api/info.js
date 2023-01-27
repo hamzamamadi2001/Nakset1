@@ -1,13 +1,12 @@
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 
-const prisma = new PrismaClient()
  export default async function handler(req ,res ){
    console.log("thus is from back",req.body.id)
   
  
 
     
-   const feed = await prisma.$queryRaw`SELECT * FROM Countrys`
+   const feed = await client.$queryRaw`SELECT * FROM Countrys`
     console.log("this is the post ",feed)
   // console.log("i am in cat",categories)
 

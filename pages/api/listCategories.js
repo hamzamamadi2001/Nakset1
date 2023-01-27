@@ -1,14 +1,12 @@
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 
-
-const prisma = new PrismaClient()
  export default async function handler(req ,res ){
    
   
  
 
     
-  const categories = await prisma.category.findMany().finally(async()=>{prisma.$disconnect()})
+  const categories = await client.category.findMany().finally(async()=>{client.$disconnect()})
   console.log(categories)
   console.log("i am in cat",categories)
 

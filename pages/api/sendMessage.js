@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 
-const prisma = new PrismaClient()
 export default function (req, res) {
    
   let nodemailer = require('nodemailer')

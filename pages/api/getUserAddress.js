@@ -1,15 +1,14 @@
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 import { getToken } from "next-auth/jwt"
 
-const prisma = new PrismaClient()
- export default async function handler(req ,res ){
+  export default async function handler(req ,res ){
 
    let neww = false
   let adress =null
  
 const token = await getToken({ req})
 if (token) {
-    const address = await prisma.address.findMany({where:{id:token.id}}).finally(async()=>{prisma.$disconnect()})
+    const address = await client.address.findMany({where:{id:token.id}}).finally(async()=>{client.$disconnect()})
     
 if(address.length<=0){
    neww = true
@@ -17,8 +16,8 @@ if(address.length<=0){
     adress=address[0].country+","+address[0].city+","+address[0].postal+","+address[0].street
 
 }
-    const countrys = await prisma.countrys.findMany().finally(async()=>{prisma.$disconnect()})
-   const citys = await prisma.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}).finally(async()=>{prisma.$disconnect()})
+    const countrys = await client.countrys.findMany().finally(async()=>{client.$disconnect()})
+   const citys = await client.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}).finally(async()=>{client.$disconnect()})
 
 
    

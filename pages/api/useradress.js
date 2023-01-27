@@ -1,8 +1,6 @@
 import { getToken } from "next-auth/jwt"
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 
-
-const prisma = new PrismaClient()
 export default async (req, res) => {
     
 
@@ -12,7 +10,7 @@ export default async (req, res) => {
   if (token) {
 console.log("this is the token",token)
 
-    const categories = await prisma.address.findMany({where:{id:token.id}}).finally(async()=>{prisma.$disconnect()})
+    const categories = await client.address.findMany({where:{id:token.id}}).finally(async()=>{client.$disconnect()})
     console.log(categories)
     const updatedData = JSON.stringify(categories
         , (_key, value) => {

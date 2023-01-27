@@ -1,9 +1,8 @@
 import { getToken } from "next-auth/jwt"
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 
 
-const prisma = new PrismaClient()
-export default async (req, res) => {
+ export default async (req, res) => {
     
 
   // If you don't have NEXTAUTH_SECRET set, you will have to pass your secret as `secret` to `getToken`
@@ -12,13 +11,13 @@ export default async (req, res) => {
   if (token) {
 
 
-    const oreders = await prisma.order.findMany({where: {
+    const oreders = await client.order.findMany({where: {
       AND: [
         { userId: token.id },
         { payed: true },
        
       ],
-    },}).finally(async()=>{prisma.$disconnect()})
+    },}).finally(async()=>{client.$disconnect()})
     
     
      res.status(200).json(oreders)

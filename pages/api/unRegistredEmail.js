@@ -1,7 +1,6 @@
 //unRegistredEmail
-import { PrismaClient } from "@prisma/client"
+import  client   from '../../lib/prismadb'
 
-const prisma = new PrismaClient()
 const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
@@ -21,14 +20,14 @@ try {
           throw new Error 
           }else{
                 console.log("good")
-                const exist = await prisma.notRegistredEmails.findFirst({where:{email:req.body.email}}).finally(async()=>{prisma.$disconnect()})
+                const exist = await client.notRegistredEmails.findFirst({where:{email:req.body.email}}).finally(async()=>{client.$disconnect()})
                 if(exist)
                         {
                           return res.status(200).json({error:2})
                         }
                         else
                             {
-                              const products = await prisma.notRegistredEmails.create({data:{email:req.body.email}}).finally(async()=>{prisma.$disconnect()})
+                              const products = await client.notRegistredEmails.create({data:{email:req.body.email}}).finally(async()=>{client.$disconnect()})
                               return res.status(200).json({error:0})
                             }
                 
