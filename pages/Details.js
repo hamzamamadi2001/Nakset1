@@ -47,25 +47,5 @@ function About({result}) {
     </div>
    )
 }
-export async function getServerSideProps (context) {
-  console.log("the resultc context",context.query);
  
- let user ={
-  id:context.query
- }
-  let response = await fetch("http://localhost:3000/api/listProducts",{method: 'POST',
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8'
-  },
-  body: JSON.stringify({id:context.query.id})});
-console.log("so so",response)
-let result = await response.json(response);
-console.log("this is from now",result);
-
-
-return {
-props: { result }
-}
-
-}
 export default About
