@@ -189,7 +189,7 @@ value="ll;k;"
         {country.map((res,index) =>{
           
           return (
-           <option  value={res.id}>{res.name}</option>
+           <option key={res.id}  value={res.id}>{res.name}</option>
 
                   )})}
                   </select>
@@ -208,11 +208,11 @@ value="ll;k;"
 
 {city.map((res,index) =>{
   if(index==0)
-  return(  <option value={res.id}>{res.name}</option>
+  return(  <option key={res.id} value={res.id}>{res.name}</option>
   )
   else
   return (
-   <option  value={res.id}>{res.name}</option>
+   <option key={res.id}  value={res.id}>{res.name}</option>
 
           )})}
           </select>

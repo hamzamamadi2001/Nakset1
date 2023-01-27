@@ -217,7 +217,7 @@ className='text-lg sm:text-4xl font-rubik '
         {result[1].map((res) => (
 
 
-          <Tab icon={ <ReactCountryFlag key={res.id}
+          <Tab key={res.id} icon={ <ReactCountryFlag key={res.id}
             className=""
             onClick={async()=>{ await handleChangeCountry(res.id)}}
                                       countryCode={res.name}
