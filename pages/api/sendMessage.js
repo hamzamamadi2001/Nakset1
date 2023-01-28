@@ -1,4 +1,4 @@
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 
 export default function (req, res) {
    

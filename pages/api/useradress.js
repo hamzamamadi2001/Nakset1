@@ -1,5 +1,5 @@
 import { getToken } from "next-auth/jwt"
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 
 export default async (req, res) => {
     
@@ -10,7 +10,7 @@ export default async (req, res) => {
   if (token) {
 console.log("this is the token",token)
 
-    const categories = await client.address.findMany({where:{id:token.id}}).finally(async()=>{client.$disconnect()})
+    const categories = await prisma.address.findMany({where:{id:token.id}}).finally(async()=>{prisma.$disconnect()})
     console.log(categories)
     const updatedData = JSON.stringify(categories
         , (_key, value) => {

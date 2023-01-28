@@ -1,4 +1,4 @@
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 
  export default async function handler(req ,res ){
 
@@ -6,7 +6,7 @@ import  client   from '../../lib/prismadb'
   console.log("i am in cat",req.body.id)
 
 
-  const categories = await client.Citys.findMany({where:{country:req.body.id}}).finally(async()=>{client.$disconnect()})
+  const categories = await prisma.Citys.findMany({where:{country:req.body.id}}).finally(async()=>{prisma.$disconnect()})
   console.log(categories)
   console.log("i am in cat",categories)
 

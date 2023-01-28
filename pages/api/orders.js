@@ -1,5 +1,5 @@
 import { getToken } from "next-auth/jwt"
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 
 
  export default async (req, res) => {
@@ -11,13 +11,13 @@ import  client   from '../../lib/prismadb'
   if (token) {
 
 
-    const oreders = await client.order.findMany({where: {
+    const oreders = await prisma.order.findMany({where: {
       AND: [
         { userId: token.id },
         { payed: true },
        
       ],
-    },}).finally(async()=>{client.$disconnect()})
+    },}).finally(async()=>{prisma.$disconnect()})
     
     
      res.status(200).json(oreders)

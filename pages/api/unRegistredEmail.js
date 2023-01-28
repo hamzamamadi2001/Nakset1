@@ -1,5 +1,5 @@
 //unRegistredEmail
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 
 const validateEmail = (email) => {
   return String(email)
@@ -20,14 +20,14 @@ try {
           throw new Error 
           }else{
                 console.log("good")
-                const exist = await client.notRegistredEmails.findFirst({where:{email:req.body.email}}).finally(async()=>{client.$disconnect()})
+                const exist = await prisma.notRegistredEmails.findFirst({where:{email:req.body.email}}).finally(async()=>{prisma.$disconnect()})
                 if(exist)
                         {
                           return res.status(200).json({error:2})
                         }
                         else
                             {
-                              const products = await client.notRegistredEmails.create({data:{email:req.body.email}}).finally(async()=>{client.$disconnect()})
+                              const products = await prisma.notRegistredEmails.create({data:{email:req.body.email}}).finally(async()=>{prisma.$disconnect()})
                               return res.status(200).json({error:0})
                             }
                 

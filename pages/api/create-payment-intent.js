@@ -1,6 +1,6 @@
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 const moment = require("moment");
 
  const calculateOrderAmount = async (items,currency,userid) => {
@@ -67,7 +67,7 @@ const getUser = await client.product.findMany({
   if(info.length==0){
     return -1
   }
-  const getorder = await client.order.create({
+  const getorder = await prisma.order.create({
     data: {
       userId:userid,
       order:JSON.stringify(info),
@@ -78,7 +78,7 @@ const getUser = await client.product.findMany({
   currencyValue:curr
      
     },
-  }).finally(async()=>{client.$disconnect()})
+  }).finally(async()=>{prisma.$disconnect()})
    
  console.log("this is the currency from the api",curr)
  return  {sum:(Math.round( sum*curr* 100) / 100).toFixed(2),orderID:getorder.id}

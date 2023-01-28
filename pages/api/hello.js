@@ -57,10 +57,8 @@ export default async (req, res) => {
   console.log("JSON Web Token", token)
   if (token) {
      res.status(200).json({name:"hamza mamadi"})
-    console.log("JSON Web Token", JSON.stringify(token, null, 2))
-    
+     
   } else {
-    // Not Signed in
-    res.status(401).json("you dont have the permission to access")
+     res.status(401).json("you dont have the permission to access")
   }
  }

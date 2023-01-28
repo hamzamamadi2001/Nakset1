@@ -1,4 +1,4 @@
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 import { getToken } from "next-auth/jwt"
  
 export default async (req, res) => {
@@ -8,7 +8,7 @@ export default async (req, res) => {
   const token = await getToken({ req})
   console.log("JSON Web Token", token)
   if (token) {
-     const address = await client.address.upsert({where:{id:token.id},update: {
+     const address = await prisma.address.upsert({where:{id:token.id},update: {
         city:req.body.city,
         country:req.body.country,
         postal:req.body.postal,
@@ -23,7 +23,7 @@ export default async (req, res) => {
         street:req.body.build,
 
 
-      },}).finally(async()=>{client.$disconnect()})
+      },}).finally(async()=>{prisma.$disconnect()})
     console.log(address)
       res.status(200).json(address)
     

@@ -2,7 +2,7 @@
 // See your keys here: https://dashboard.stripe.com/apikeys
 const stripe = require('stripe')('sk_test_51ML3mmCZwBUcumd5gzAH8dvIQ5NA0VSCvB0Q0cnBVz0eRvDX8micDhbtvwwkPwjT5qPPIyOjuz6s7L1HqxnvLsVc00vB5AL5yc');
 import { buffer } from 'micro';
-import  client   from '../../lib/prismadb'
+import  prisma   from '../../lib/prismadb'
 
 
 // Find your endpoint's secret in your Dashboard's webhook settings
@@ -72,7 +72,7 @@ switch (event.type) {
     case 'charge.succeeded':
       const paymentIntent = event.data.object.metadata;
       console.log("\x1b[32m","you got the mony now!",paymentIntent)
-      const updateUser = await client.order.update({
+      const updateUser = await prisma.order.update({
         where: {
           id:parseInt(paymentIntent.orderID),
         },
