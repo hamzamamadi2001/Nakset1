@@ -445,12 +445,15 @@ export async function getServerSideProps(context) {
 
 // let result2 = await response.json()
 // console.log(result2)
+
+
+
 const categories = await client.category.findMany({select:{id:true,name:true}}) 
    const countrys = await client.countrys.findMany({take:10}) 
-   const citys = await client.citys.findMany({where:{country:1},select:{id:true,name:true}}) 
+   const citys = await client.citys.findMany({where:{country:0},select:{id:true,name:true}})
 
 
-  const products = await client.product.findMany({where:{city:0}})
+  const products = await client.product.findMany({where:{city:citys[0].id}})
  let result=
  [ categories,countrys,citys,products]
  
