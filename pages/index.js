@@ -448,9 +448,14 @@ export async function getServerSideProps(context) {
 
 
 
- 
+const categories = await client.category.findMany({select:{id:true,name:true}}) 
+   const countrys = await client.countrys.findMany({where:{}}) 
+   const citys = await client.citys.findMany({where:{country:0},select:{id:true,name:true}})
+
+
+  const products = await client.product.findMany({where:{city:citys[0].id}})
  let result=
- [ [{id:0,name:"Fasfds",photo:"https://res.cloudinary.com/my-online-store/image/upload/v1672996520/degewqsfiv33ialxot3m.jpg"}],[{id:0,name:"hu"}],[{id:0,name:"fadkfa",country:0}],[{id:0,name:"hello",unit:1,photo:"https://res.cloudinary.com/my-online-store/image/upload/v1672996520/degewqsfiv33ialxot3m.jpg",categoryId:0,baseQuantity:1,city:0}]]
+ [ categories,countrys,citys,products]
  
 
 return {

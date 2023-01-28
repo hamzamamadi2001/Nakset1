@@ -12,14 +12,12 @@ console.log("this is the token",token)
 
     const categories = await prisma.address.findMany({where:{id:token.id}}).finally(async()=>{prisma.$disconnect()})
     console.log(categories)
-    const updatedData = JSON.stringify(categories
-        , (_key, value) => {
-        typeof value === 'bigint' ? value = value.toString() : value
-    })
-    delete categories[0].id
+   if(categories.length>0){
+        delete categories[0].id
+
+   }
      res.status(200).json( categories )
-    // console.log("JSON Web Token", JSON.stringify(token, null, 2))
-    
+     
   } else {
     // Not Signed in
     res.status(401)
