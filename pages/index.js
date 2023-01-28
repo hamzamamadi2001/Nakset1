@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import { TbMoodEmpty } from 'react-icons/tb';
  import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import  client   from '../lib/prismadb'
 
 
 export default function Home({result})
@@ -439,13 +440,19 @@ className='text-lg sm:text-4xl font-rubik '
 export async function getServerSideProps(context) {
  // console.log("this is context",context.req.headers.cookie)
   //replace the url with this before uploading it to  the server "https://nakset.vercel.app/api/listCategories"
-    let response = await fetch("https://nakset.vercel.app/api/listCategories")
+//     let response = await fetch("https://nakset.vercel.app/api/listCategories")
 
 
-let result2 = await response.json()
-console.log(result2)
+// let result2 = await response.json()
+// console.log(result2)
+const categories = await client.category.findMany({select:{id:true,name:true}}) 
+   const countrys = await client.countrys.findMany({take:10}) 
+   const citys = await client.citys.findMany({where:{country:1},select:{id:true,name:true}}) 
+
+
+  const products = await client.product.findMany({where:{city:0}})
  let result=
- [ result2.data[0],result2.data[1],result2.data[2],result2.data[3]]
+ [ categories,countrys,citys,products]
  
 
 return {
