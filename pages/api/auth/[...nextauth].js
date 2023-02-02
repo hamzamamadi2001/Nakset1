@@ -107,7 +107,7 @@ export const authOptions = {
           
                     name:token.name,
                     password:'',
-           provider :token.provider?token.provider:token.provider,
+           provider :token.provider?token.provider:"facebook",
            photo :token.image?token.image:token.picture
                   },}).finally(async()=>{prisma.$disconnect()})
                   if(token.email!=undefined && token.email!=null){
