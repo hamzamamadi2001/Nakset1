@@ -23,7 +23,7 @@ model User {
 model Product {
   id           Int      @unique @default(autoincrement())
   name         String   @db.Text
-  price        Int
+  price        Float
   unit         String   @db.Text
   photo        String
   categoryId   Int

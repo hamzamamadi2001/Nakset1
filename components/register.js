@@ -214,9 +214,7 @@ let commits = await response.json();
           onChange={onInputChange}
           onBlur={validateInput}></input>
         {error.email && <span className=' w-48 break-words text-red-600 font-bold text-xs'>{error.email}</span>}
-      <div className="flex items-center gap-2">
-        <Checkbox name="condition" id="agree"  checked={input.condition}
-          onChange={handleChange}  />
+
 
 
         <input
@@ -236,7 +234,9 @@ let commits = await response.json();
           onChange={onInputChange}
           onBlur={validateInput}></input>
         {error.confirmPassword && <span className='w-48 break-words text-red-600 font-bold text-xs'>{error.confirmPassword}</span>}
-     
+        <div className="flex items-center gap-2">
+        <Checkbox name="condition" id="agree"  checked={input.condition}
+          onChange={handleChange}  />
         
 
         <Label htmlFor="agree">

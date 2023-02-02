@@ -1,6 +1,6 @@
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = require('stripe')('sk_test_51ML3mmCZwBUcumd5gzAH8dvIQ5NA0VSCvB0Q0cnBVz0eRvDX8micDhbtvwwkPwjT5qPPIyOjuz6s7L1HqxnvLsVc00vB5AL5yc');
+const stripe = require('stripe')('pk_live_51ML3mmCZwBUcumd5gk94aPjfpcPpoa5irPaadUbVFRWO7XN0em5UDlRN1LcVoCtf3OKB5HU51L4JNyIciKryAvu000WdmsF0MQ');
 import { buffer } from 'micro';
 import  prisma   from '../../lib/prismadb'
 
