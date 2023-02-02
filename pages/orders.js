@@ -35,9 +35,9 @@ const [order, setRealOrders] = useState(null);
     
    
  
-      if(session){
+    
         async function fetchText() {
-        let response = await fetch('https://nakset.vercel.app/api/orders',{method: 'POST',
+        let response = await fetch('https://nakset.vercel.app/api/orders',{method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         }
@@ -53,8 +53,7 @@ const [order, setRealOrders] = useState(null);
       }
       
       fetchText();
-      }
-      
+     
       
       }, [ ]);
    

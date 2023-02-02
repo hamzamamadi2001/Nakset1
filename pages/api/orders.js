@@ -18,7 +18,7 @@ import  prisma   from '../../lib/prismadb'
        
       ],
     },}).finally(async()=>{prisma.$disconnect()})
-    
+    await prisma.$disconnect()
     
      res.status(200).json(oreders)
     // console.log("JSON Web Token", JSON.stringify(token, null, 2))
