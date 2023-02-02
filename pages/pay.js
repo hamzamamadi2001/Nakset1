@@ -4,12 +4,12 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from "next/router";
 import CheckoutForm from "../components/CheckoutForm";
-import {useSession,getSession} from 'next-auth/react'
+import {useSession} from 'next-auth/react'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe("pk_live_51ML3mmCZwBUcumd5gk94aPjfpcPpoa5irPaadUbVFRWO7XN0em5UDlRN1LcVoCtf3OKB5HU51L4JNyIciKryAvu000WdmsF0MQ");
 
 export default function App() {
   const {data:session,status}= useSession()

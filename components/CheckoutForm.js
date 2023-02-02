@@ -5,14 +5,12 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-import {loadStripe} from '@stripe/stripe-js';
-
+ 
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
-  const stripePromise = loadStripe("pk_live_51ML3mmCZwBUcumd5gk94aPjfpcPpoa5irPaadUbVFRWO7XN0em5UDlRN1LcVoCtf3OKB5HU51L4JNyIciKryAvu000WdmsF0MQ")
-  const [email, setEmail] = React.useState('');
+   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -92,7 +90,7 @@ export default function CheckoutForm() {
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target.value)}
       /> */}
-      <PaymentElement id="payment-element" options={paymentElementOptions} stripe={loadStripe}  />
+      <PaymentElement id="payment-element" options={paymentElementOptions}  />
       <div className="flex justify-center items-center my-4">
       <button className=" bg-green-600 text-white p-5 rounded-full" disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
