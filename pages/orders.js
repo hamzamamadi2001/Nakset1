@@ -63,10 +63,10 @@ const [order, setRealOrders] = useState(null);
   return (
     < >
             
-    <div className='container mx-auto min-h-screen   grid grid-flow-row gap-1   '>
+    <div className='container mx-auto    grid      '>
   
  {orders && orders.map((ele) => (
-    <div key={res.id} className='mb-8 bg-gray-500'>
+    <div key={ele.id} >
 
 
 
@@ -76,7 +76,7 @@ const [order, setRealOrders] = useState(null);
 
 
 
-<Timeline className='flex justify-evenly mt-5 ' horizontal={true}>
+<Timeline className='flex justify-evenly mt-20 ' horizontal={true}>
   {<Timeline.Item className={ele.status=="verifing"?'animate-bounce':""}>
     <Timeline.Point  color='green' icon={MdOutlineFoodBank} />
     <Timeline.Content>
@@ -166,7 +166,7 @@ const [order, setRealOrders] = useState(null);
          </div>
          ))}
 
-{orders.length<=0 &&<div className='flex flex-col justify-center items-center'>
+{orders.length<=0 &&<div className='flex min-h-screen flex-col justify-center items-center'>
          <p className='text-cneter text-2xl font-mono'>You dont have any orders</p>
      <TbMoodEmpty color='gray' size={100}></TbMoodEmpty>
      </div> }
