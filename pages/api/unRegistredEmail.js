@@ -21,6 +21,7 @@ try {
           }else{
                 console.log("good")
                 const exist = await prisma.notRegistredEmails.findFirst({where:{email:req.body.email}}).finally(async()=>{prisma.$disconnect()})
+                await prisma.$disconnect()
                 if(exist)
                         {
                           return res.status(200).json({error:2})
@@ -28,6 +29,7 @@ try {
                         else
                             {
                               const products = await prisma.notRegistredEmails.create({data:{email:req.body.email}}).finally(async()=>{prisma.$disconnect()})
+                              await prisma.$disconnect()
                               
                               let nodemailer = require('nodemailer')
                               const transporter = nodemailer.createTransport({

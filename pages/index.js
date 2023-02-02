@@ -449,9 +449,10 @@ export async function getServerSideProps(context) {
 const categories = await client.category.findMany({select:{id:true,name:true}}) 
    const countrys = await client.countrys.findMany({where:{}}) 
    const citys = await client.citys.findMany({where:{country:0},select:{id:true,name:true}})
-
+   await prisma.$disconnect()
 
   const products = await client.product.findMany({where:{city:citys[0].id}})
+  await prisma.$disconnect()
  let result=
  [ categories,countrys,citys,products]
  
