@@ -46,7 +46,7 @@ const [order, setRealOrders] = useState(null);
       
         if (response.status === 200) {
             let data = await response.json();
-            setOrders(data)
+            setOrders(data.reverse())
            
              
         }
