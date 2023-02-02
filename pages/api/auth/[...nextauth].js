@@ -84,7 +84,7 @@ export const authOptions = {
               
                  
                 let result =  await   prisma.user.findUnique({ where: {
-                  email:   token.email?token.email:token.image.split('=')[1].split('&')[0]
+                  email:   token.email?token.email:token.picture.split('=')[1].split('&')[0]
                 }
                 ,}).finally(async()=>{prisma.$disconnect()})
                  
@@ -103,7 +103,7 @@ export const authOptions = {
                 }else{
                   console.log("this is the user opject",token.email)
                   let newuser =  await   prisma.user.create({ data: {
-                    email: token.email?token.email:token.image.split('=')[1].split('&')[0] ,
+                    email: token.email?token.email:token.picture.split('=')[1].split('&')[0] ,
           
                     name:token.name,
                     password:'',
