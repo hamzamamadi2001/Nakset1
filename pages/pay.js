@@ -1,7 +1,7 @@
 import React ,{useState}from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useRouter } from "next/router";
 import CheckoutForm from "../components/CheckoutForm";
 import {useSession} from 'next-auth/react'

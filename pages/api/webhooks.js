@@ -16,10 +16,7 @@ export const config = {
 
  
 export default async (request,response) => {
-const fulfillOrder = (lineItems) => {
-  // TODO: fill me in
-  console.log("Fulfilling order", lineItems);
-}
+ 
 const buff = await buffer(request)
 const ress = buff.toString()
 const body = await request.rawbody

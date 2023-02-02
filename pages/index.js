@@ -15,8 +15,7 @@ import { TbMoodEmpty } from 'react-icons/tb';
  import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import  client   from '../lib/prismadb'
-import photo from "../public/meat22.jpg"
-
+ 
 export default function Home({result})
 {
   const [value, setValue] =  useState(0);

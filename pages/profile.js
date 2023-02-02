@@ -1,5 +1,5 @@
 import React ,{useState,useEffect}from 'react'
-import {useSession,getSession} from 'next-auth/react'
+import {useSession} from 'next-auth/react'
  import {Button,Modal,Label,TextInput}from "flowbite-react";
 
 

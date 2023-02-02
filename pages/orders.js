@@ -1,19 +1,13 @@
 import React ,{useState,useEffect} from 'react'
-import { Button} from "flowbite-react";
- import { AiFillMinusCircle } from 'react-icons/ai';
-import { AiFillPlusCircle } from 'react-icons/ai';
-import CardBasket from '../components/CartBbasket'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ImLocation2 } from 'react-icons/im';
 import { TbMoodEmpty } from 'react-icons/tb';
 import { MdOutlineFoodBank } from 'react-icons/md';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { FiPackage } from 'react-icons/fi';
 
-
-
-import Bay from './pay'
-import {useSession,getSession} from 'next-auth/react'
+ 
+import {useSession} from 'next-auth/react'
 import {Table,Timeline}from "flowbite-react";
 import Image from 'next/image';
 
