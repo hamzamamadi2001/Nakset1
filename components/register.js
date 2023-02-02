@@ -40,11 +40,11 @@ function Register() {
   })
   function validateName(name){
     
-    if(name == null || name == undefined){
+    if(name == null || name == undefined || name.length<=0){
       return false
     }
     name = name.replace( / +/g, ' ')
-    if (!name||name.length<4) {
+    if (name.length<4) {
       return false
     }
     return true
@@ -53,16 +53,15 @@ function Register() {
     if(pass1 == null || pass2==null ||pass1==undefined || pass2 == undefined){
       return false
     }
-    pass1 = pass1.replace( / +/g, ' ')
-    pass2 = pass2.replace( / +/g, ' ')
-    if (checkPassword(pass1)==false || !pass1 || !pass2||pass1!=pass2||pass1.length<8) {
+     
+    if (checkPassword(pass1)==false ||pass1 != pass2|| pass1.length<8) {
       return false
     }
     return true
   }
   const inputText =()  => {
-     if(validateName(input.name)==false||validateEmail(input.email)==false||validatePassword(input.password,input.confirmPassword)==false||input.condition==false){
-      return false
+     if(validateName(input.username)==false||validateEmail(input.email)==false||validatePassword(input.password,input.confirmPassword)==false||input.condition==false){
+       return false
      }
      return true
   }
@@ -83,35 +82,35 @@ function Register() {
       switch (name) {
         case "username":
           if (!value||value.length<4) {
-            stateObj[name] = "Please enter Username contain more then 4 characters."; setExistError(true)
+            stateObj[name] = "Please enter Username contain more then 4 characters.";  
           }
           break;
 
         case "password":
           if (!value || checkPassword(value)==false) {
-            stateObj[name] = " password must be at least 8 characters long, contains upper, lower letter and special characters "; setExistError(true)
+            stateObj[name] = " password must be at least 8 characters long, contains upper, lower letter and special characters ";  
           } else if (input.confirmPassword && value !== input.confirmPassword) {
-            stateObj["confirmPassword"] = "Password and Confirm Password does not match."; setExistError(true)
+            stateObj["confirmPassword"] = "Password and Confirm Password does not match.";  
           } else {
-            stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword; setExistError(true)
+            stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;  
           }
           break;
  
         case "confirmPassword":
           if (!value) {
-            stateObj[name] = "Please enter Confirm Password."; setExistError(true)
+            stateObj[name] = "Please enter Confirm Password."; 
           } else if (input.password && value !== input.password) {
-            stateObj[name] = "Password and Confirm Password does not match."; setExistError(true)
+            stateObj[name] = "Password and Confirm Password does not match.";  
           }
           break;
           case "email":
           if (!value || validateEmail(value)==false) {
-            stateObj[name] = "Please enter a valid email."; setExistError(true)
+            stateObj[name] = "Please enter a valid email.";  
           }  
           break;
           case "condition":
             if (value==false) {
-              stateObj[name] = "you must to accepte our conditions"; setExistError(true)
+              stateObj[name] = "you must to accepte our conditions";  
             }  
             break;
  
@@ -122,8 +121,17 @@ function Register() {
       return stateObj;
     });
   }
+
+
+  
   function checkPassword(str)
   {
+
+    if(str==null || str==undefined||str.length<=0){
+      return false
+    }
+    
+
       var re = /^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*$/;
       return re.test(str);
   }
@@ -141,8 +149,9 @@ function Register() {
   const router = useRouter()
 
 async function handelRegister(e){
+  console.log("this is demo data",input.email,input.username,input.password,input.condition,input.confirmPassword)
   setLoading(true);
-  if(!inputText() || existerror){
+  if(!inputText()){
   setSending(true)
   setLoading(false);
   
@@ -163,14 +172,14 @@ async function handelRegister(e){
   body: JSON.stringify(user)});
 
 let commits = await response.json();
-console.log("this is the result after the registration operation",commits.result)
-if(commits.result.error){
+ if(commits.result.error){
   setError2("this email already exists")
+  setLoading(false);
+
   return
 }else{
-console.log("this is the result after the registration operation",commits.result.result)
-  
-  signIn('credentials', { redirect: false, password: input.password,email:input.email}).then((res)=>{console.log(res);if(res.ok){router.push('/')}else{setError("there was a problem")}})
+   
+ await  signIn('credentials', { redirect: false, password: input.password,email:input.email}).then((res)=>{console.log(res);if(res.ok){router.push('/')}else{setError("there was a problem")}})
   setLoading(false);
 
 }
@@ -185,7 +194,7 @@ console.log("this is the result after the registration operation",commits.result
 
   const [loading, setLoading] = useState(false);
   return (
-    <form className="flex flex-col gap-4 mx-auto w-96   bg-black bg-opacity-20 backdrop-blur-sm p-10">
+    <form className="flex flex-col gap-4     p-4">
        <p className='w-full text-lg text-red-700 text-center'>{error2}</p>
        <p className='w-full text-lg text-red-700 text-center'>{(!inputText() || existerror)&&sending ?"you must fill out all fields":"" }</p>
        <input
@@ -195,8 +204,21 @@ console.log("this is the result after the registration operation",commits.result
           value={input.username}
           onChange={onInputChange}
           onBlur={validateInput}></input>
-        {error.username && <span className='text-red-600 font-bold text-xs'>{error.username}</span>}
+        {error.username && <span className=' w-96 break-words  text-red-600 font-bold text-xs'>{error.username}</span>}
  
+        <input
+          type="email"
+          name="email"
+          placeholder='Enter your email'
+          value={input.email}
+          onChange={onInputChange}
+          onBlur={validateInput}></input>
+        {error.email && <span className=' w-48 break-words text-red-600 font-bold text-xs'>{error.email}</span>}
+      <div className="flex items-center gap-2">
+        <Checkbox name="condition" id="agree"  checked={input.condition}
+          onChange={handleChange}  />
+
+
         <input
           type="password"
           name="password"
@@ -204,7 +226,7 @@ console.log("this is the result after the registration operation",commits.result
           value={input.password}
           onChange={onInputChange}
           onBlur={validateInput}></input>
-        {error.password && <span className='text-red-600 font-bold text-xs'>{error.password}</span>}
+        {error.password && <span className=' w-52 break-words text-red-600 font-bold text-xs'>{error.password}</span>}
  
         <input
           type="password"
@@ -213,18 +235,8 @@ console.log("this is the result after the registration operation",commits.result
           value={input.confirmPassword}
           onChange={onInputChange}
           onBlur={validateInput}></input>
-        {error.confirmPassword && <span className='text-red-600 font-bold text-xs'>{error.confirmPassword}</span>}
-        <input
-          type="email"
-          name="email"
-          placeholder='Enter your email'
-          value={input.email}
-          onChange={onInputChange}
-          onBlur={validateInput}></input>
-        {error.email && <span className='text-red-600 font-bold text-xs'>{error.email}</span>}
-      <div className="flex items-center gap-2">
-        <Checkbox name="condition" id="agree"  checked={input.condition}
-          onChange={handleChange}  />
+        {error.confirmPassword && <span className='w-48 break-words text-red-600 font-bold text-xs'>{error.confirmPassword}</span>}
+     
         
 
         <Label htmlFor="agree">

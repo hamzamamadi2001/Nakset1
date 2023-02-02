@@ -16,6 +16,8 @@ model User {
   password String @db.Text
   provider String @db.Text
   photo    String @default("https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg")
+  order    Order[]
+  adress address?
 }
 
 model Product {
@@ -49,6 +51,8 @@ model Order {
   currencyValue Float
   status        String
   total         Float
+  user   User   @relation(fields: [userId], references: [id],onUpdate: NoAction)
+  
 }
 
 model address {
@@ -59,6 +63,8 @@ model address {
   postal   String? @db.Text
   phone    String? @db.Text
   street   String? @db.Text
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique // relation scalar field (used in the `@relation` attribute above)
 }
 
 model Citys {
@@ -70,6 +76,8 @@ model Citys {
 model Countrys {
   id   Int     @id
   name String? @db.Text
+  code String? @db.Text
+
 }
 
 model NotRegistredEmails {

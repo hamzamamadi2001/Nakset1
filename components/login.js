@@ -69,10 +69,10 @@ function About() {
   function checkPassword(str)
   {
 
-    if(str==null || str==undefined){
+    if(str==null || str==undefined||str.length<=0){
       return false
     }
-    str = str.replace( / +/g, ' ')
+    
 
       var re = /^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*$/;
       return re.test(str);
@@ -99,8 +99,8 @@ function About() {
  }
   return (
     
-  <form className="flex flex-col gap-4 mx-auto w-96   bg-black bg-opacity-20 backdrop-blur-sm p-10">
- <p className='w-full text-lg text-red-700 text-center'>{error2}</p>
+  <form className="flex flex-col gap-4        p-4">
+{ error2 && <p className='w-full text-lg text-red-700 text-center'>the username or password is wrong</p>}
  <p className='w-full text-lg text-red-700 text-center'>{(!inputText() || existerror)&&sending ?"you must fill out all fields correctly":"" }</p>
 
   
@@ -117,7 +117,7 @@ function About() {
           value={input.email}
           onChange={onInputChange}
           onBlur={validateInput}></input>
-        {error.email && <span className='text-red-600 font-bold text-xs'>{error.email}</span>}
+        {error.email && <span className= 'w-48 break-words text-red-600 font-bold text-xs'>{error.email}</span>}
    
    
     <div className="mb-2 block">
@@ -133,11 +133,11 @@ function About() {
           value={input.password}
           onChange={onInputChange}
           onBlur={validateInput}></input>
-        {error.password && <span className='text-red-600 font-bold text-xs'>{error.password}</span>}
+        {error.password && <span className='w-48 break-words text-red-600 font-bold text-xs'>{error.password}</span>}
  
   
   <Button onClick={async ()=>{
-    
+     setLoading(true)
     if(!inputText() || existerror){
     
       setSending(true)
@@ -146,8 +146,9 @@ function About() {
     
         return 
       }
-    setLoading(true);if(existerror){return}signIn('credentials', { redirect: false, password: input.password,email: input.email}).then((res)=>{if(res.ok){router.push('/'); }else{setError2(true)}})
-}} disabled={loading} gradientDuoTone="greenToBlue">
+  await signIn('credentials', { redirect: false, password: input.password,email: input.email}).then((res)=>{if(res.ok){router.push('/'); }else{setError2(true)}})
+   setLoading(false);
+  }} disabled={loading} gradientDuoTone="greenToBlue">
      {loading?<Spinner
     color="info"
     aria-label="Info spinner example"

@@ -38,10 +38,7 @@ if(Number(result) <=1)
     
   };
 
-  console.log(value);
-  console.log(typeof value);
-  console.log(Number(value));
-
+   
   // 👇️ validation
   if (value !== '') {
     const num = Number(value);
@@ -58,7 +55,7 @@ if(Number(result) <=1)
     
   
 </div>
-<Button className='mt-10' >My orders</Button>  
+<Button href='/orders' className='mt-10' >My orders</Button>  
      </div> 
 {/* <div>
         <Table striped={true}>
@@ -102,8 +99,3 @@ if(Number(result) <=1)
 }
 
 export default About
-export const getStaticProps = async () => {
-  return {
-    props: {},
-  };
-};

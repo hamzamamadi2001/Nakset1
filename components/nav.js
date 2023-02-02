@@ -91,21 +91,15 @@ const [language, setLanguage] = useState('US');
 
   return (
 <div>
-    <Navbar
-  className="w-full  z-50  flex-col-reverse  shadow-2xl backdrop-filter     rounded-r-lg  bg-gray-900   backdrop-blur-0    flex justify-center items-center "
+    <Navbar style={{borderBottom: '1px solid gray'}}
+  className="w-full  z-50 fixed  flex-col-reverse  shadow-2xl backdrop-filter b    rounded-r-lg  bg-blue-800  bg-opacity-75  backdrop-blur-sm    flex justify-center items-center "
 
 >
 
 
 
   <Navbar.Brand className="hidden md:block " href="/">
-    <Image
-      src={logo}
-
-     width={90}
-     height={90}
-
-    />
+    <p className="text-white font-bold text-3xl">Nakset</p>
   </Navbar.Brand>
 
    <div className="flex flex-wrap justify-center items-center">
@@ -136,7 +130,7 @@ const [language, setLanguage] = useState('US');
     </Navbar.Link>
     </div>
   </Navbar.Collapse>
-  <p className="hidden md:block md:mx-2 text-white font-black ">|</p>
+  <p className="hidden md:block  mx-2 text-white font-black ">|</p>
 
 
 
@@ -145,7 +139,7 @@ const [language, setLanguage] = useState('US');
 
   arrowIcon={false}
   inline={true}
-  label={ <p className="text-white text-base mx-5">{curr.toUpperCase()}</p>}
+  label={ <p className="text-white text-base mx-2">{curr.toUpperCase()}</p>}
 
 
 >
@@ -172,6 +166,7 @@ const [language, setLanguage] = useState('US');
       arrowIcon={false}
       inline={true}
       label={  <ReactCountryFlag
+      className="mx-2"
         countryCode={flag}
         svg
         style={{
@@ -255,7 +250,7 @@ const [language, setLanguage] = useState('US');
     </Dropdown>
 
 
-<Link href="/basket"   className="relative">
+<Link href="/basket"   className="relative mx-2">
   <p className="text-white text-base  absolute -top-1 left-0 bg-red-700 rounded-full" >{count}</p>
 <RiShoppingBasketFill size={30}  cursor="pointer" onClick={async (e)=>{console.log("testing icon") }} color='white' className="mx-2" ></RiShoppingBasketFill>
    </Link>
@@ -274,13 +269,14 @@ const [language, setLanguage] = useState('US');
     >
 <Link href="/profile"    >
       <Dropdown.Item >
-      {t("text:my information")}
+      {/* {t("text:my information")} */}
+      user profile
       </Dropdown.Item></Link>
       <Dropdown.Divider />
       <Dropdown.Item onClick={async()=>{signOut()}}>
       {t("text:logout")}
       </Dropdown.Item>
-    </Dropdown>):<Link href="sum"><Button   className='flex flex-row-reverse justify-around items-center '  >
+    </Dropdown>):<Link className="mx-2" href="sum"><Button   className='flex flex-row-reverse justify-around items-center '  >
  <p>{t("text:login")}</p>
 
     </Button></Link>}

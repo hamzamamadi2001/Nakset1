@@ -1,55 +1,4 @@
- import {hash} from "bcrypt"
- import  prisma   from '../../lib/prismadb'
-
- export default async function handler(req ,res ){
-  console.log("i am in registation")
-
-  const validateEmail = (email) => {
-    if(email == undefined || email==null) { return false}
-          var result = String(email)
-      .toLowerCase()
-      .match(
-        /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/   );
-        if(result==null)  {  return false}
-        else{ return true}
-
-  };
-  if((typeof(req.body.password)!="string" ||req.body.password.length<8 ||typeof(req.body.email)!="string"||validateEmail(req.body.email)==false||typeof(req.body.username)!="string" ||  req.body.username.length<=0 )){
-    return res.status(401).json({result:{error:1,result,message:"Invalid information"}}) 
-   }
-  
-  let exist =  await   prisma.user.findUnique({ where: {
-    email: req.body.email
-  },})
-  console.log(exist)
-  if(exist){
-   return res.status(400).json({result:{error:1,message:"invalid information"}})  
-  }
-
-hash(req.body.password, 10).then( async function(hash) {
-const result = await prisma.user.create({data:{email:req.body.email,password:hash,provider:"credentials",name:req.body.username,photo:"https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg"}}).finally(async()=>{prisma.$disconnect()})
-      console.log(result)
-  console.log("i am in 3333",result)
-  if(result){
-    let nodemailer = require('nodemailer')
-  const transporter = nodemailer.createTransport({
-    port: 465,
-   
-    host: "smtp.gmail.com",
-    auth: {
-      user: 'hamzamamadi39@gmail.com',
-      pass:'cqglihvtoiydsjia',
-    }, tls: {
-      rejectUnauthorized: false
-    },
-    secure: true,
-  })
-  const mailData = {
-    from :'hamzamamadi39@gmail.com',
-    to: req.body.email,
-    subject: `welcome to nakset`,
-    text: "registration completed" ,
-    html:  `<!DOCTYPE html>
+<!DOCTYPE html>
     <!--Code By Webdevtrick ( https://webdevtrick.com )-->
     <html lang="en">
     
@@ -86,10 +35,15 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
     
                     <tr>
                       <td align="center"bgcolor="#66809b" style="font-family: 'Raleway', sans-serif; font-size:37px; color:#001391;; line-height:24px; font-weight: bold; letter-spacing: 5px;">
-                        WELCOME to Nakset
+                        Order confirmed
+                      
                       </td>
                     </tr>
-    
+                    <tr>
+                      <td align="center"bgcolor="#66809b" style="font-family: 'Raleway', sans-serif; font-size:20px; color:#001391;; line-height:24px; font-weight: bold; letter-spacing: 5px;">
+                       your order is preparing now 
+                      </td>
+                    </tr>
     
     
     
@@ -119,7 +73,7 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
           <td align="center">
             <table align="center" class="col-600" width="600" border="0" cellspacing="0" cellpadding="0">
               <tbody><tr>
-                <td align="center" bgcolor="#333">
+                <td align="center" bgcolor="#fffff">
                   <table class="col-600" width="600" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tbody><tr>
                       <td height="33"></td>
@@ -136,7 +90,7 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
     
                           <tr>
                             <td align="center">
-                              <img style="display:block; line-height:0px; font-size:0px; border:0px;" class="images_style" src="https://webdevtrick.com/wp-content/uploads/email-template.png" alt="img" width="156" height="160">
+                              <img style="display:block; line-height:0px; font-size:0px; border:0px;" class="images_style" src="https://res.cloudinary.com/my-online-store/image/upload/v1672996002/bvvfwegfp34gergzaav4.jpg" alt="img" width="156" height="160">
                             </td>
     
     
@@ -149,7 +103,7 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
                         <table class="col3_one" width="380" border="0" align="right" cellpadding="0" cellspacing="0">
     
                           <tbody><tr align="left" valign="top">
-                            <td style="font-family: 'Raleway', sans-serif; font-size:20px; color:#fbb016; line-height:30px; font-weight: bold;">Hi ${req.body.username}  </td>
+                            <td style="font-family: 'Raleway', sans-serif; font-size:20px; color:#fbb016; line-height:30px; font-weight: bold;">your order</td>
                           </tr>
     
     
@@ -159,28 +113,15 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
     
     
                           <tr align="left" valign="top">
-                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height:24px; font-weight: 300;">
-                                your registration has been completed and we willing to you yo enjoy halal food with us and sharing it with your friends
-                            </td>
+                            <td style=" font-family: 'Lato', sans-serif; font-size:25px; color:rgb(0, 0, 0); line-height:24px; font-weight: 700;">
+5kg                      </td>
                           </tr>
     
                           <tr>
                             <td height="10"></td>
                           </tr>
     
-                          <tr align="left" valign="top">
-                            <td>
-                              <table class="button" style="border: 2px solid #fff;" bgcolor="#fbb016" width="30%" border="0" cellpadding="0" cellspacing="0">
-                                <tbody><tr>
-                                  <td width="10"></td>
-                                  <td height="30" align="center" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#ffffff;">
-                                    <a href="#" style="color:#ffffff; text-decoration: none;">About us</a>
-                                  </td>
-                                  <td width="10"></td>
-                                </tr>
-                              </tbody></table>
-                            </td>
-                          </tr>
+                          
     
                         </tbody></table>
                       </td>
@@ -198,8 +139,9 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
     
     <!-- END TITLE -->
      <!-- START SHOWCASE -->
-    
+   
      <tr>
+      <hr width="100%" >
       <td align="center">
         <table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
           <tbody><tr>
@@ -408,22 +350,4 @@ these are the most important certeficates that we have in our company.We are ver
             </tbody></table>
       
     </body>
-    </html>`
-  }
-  transporter.sendMail(mailData, function (err, info) {
-    if(err)
-      console.log(err)
-    else
-      console.log(info)
-  })
-  }
-  
-
-     return res.status(200).json({result:{error:0,result,password:req.body.password}}) 
-
- });
-                   
-
-  
-  
-}
+    </html>

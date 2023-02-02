@@ -1,11 +1,12 @@
 import React ,{useState,useEffect}from 'react'
 import {useSession,getSession} from 'next-auth/react'
-import { Label,TextInput,Button } from "flowbite-react";
+ import {Button,Modal,Label,TextInput}from "flowbite-react";
+
 
 import Image from'next/image'
 
 function About() {
-  const {data:session,status}= useSession()
+
   const [building, setBuilding] = useState('');
   const [country, setCountry] = useState([]);
   const [city, setCity] = useState([]);
@@ -15,6 +16,10 @@ function About() {
   const [isnew, setIsnew] = useState(false);
   const [oldadress, setOldAdress] = useState('');
   const [error, setError] = useState(false);
+  const [msg, setMessage] = useState(false);
+  const [msgerror, setMessageError] = useState(false);
+  const {data:session,status}= useSession()
+  const [open, setOpen] = useState(false);
 
 
 
@@ -27,8 +32,9 @@ function About() {
 
 
 
+  const [adress, setAdress] = useState([]);
 
-   useEffect(() => {
+  useEffect(() => {
     
     const handleSearch =async (id) => {
 
@@ -50,10 +56,33 @@ setOldAdress(result[2])
        setCountry(result[0])
        setCity(result[1])
     };
-    handleSearch()
+
+     handleSearch()
+
+    
+   
+ 
+if(session){
+  async function fetchText() {
+  let response = await fetch('https://nakset.vercel.app/api/useradress',{method: 'POST',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+  body: JSON.stringify({id:session.id})});
+ 
+
+  if (response.status === 200) {
+      let data = await response.json();
+      setAdress(data)
+       
+  }
+}
+
+fetchText();
+}
 
 
-  },[]);
+}, [session]);
 
 
 
@@ -64,6 +93,7 @@ setOldAdress(result[2])
     setChosenCity(label)
   };
   
+
 
   const handleChangeCountry =async (e) => {
     console.log(e.target.value)
@@ -80,14 +110,28 @@ setOldAdress(result[2])
          
         let result = await response.json(response);
          setCity(result)
+         if(result.length>0){
+          setChosenCityId(result[0].id)
+         setChosenCity(result[0].name)
+         }else{
+          
+          setChosenCityId(null)
+         setChosenCity('')
+         }
+          
+
 
    
   };
- 
+  function onClick(){
+    setOpen(prev=>!prev)
+  }
   async function updateAdress(){
-    console.log("i am in submit")
-    setError(true)
-    if(postal==null || postal.length<=0||postal == undefined || chosencountry == undefined || chosencountry==null || chosencity == undefined || chosencity==null || building == undefined || building==null ||building.length<=0){setError(true); return false}
+    setMessage(false)
+    setMessageError(false)
+
+     setError(true)
+     if(postal==null || postal.length<=0||postal == undefined || chosencountry == undefined || chosencountry==null || chosencity == undefined || chosencity==null || building == undefined || building==null ||building.length<=0){setError(true); return false}
     let response = await fetch("https://nakset.vercel.app/api/updateAddress",{method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -95,11 +139,23 @@ setOldAdress(result[2])
     body: JSON.stringify({country:chosencountry,city:chosencity,postal:postal,build:building})});
  
   let result = await response.json(response);
-  setOldAdress(result.country+","+result.city+","+result.postal+","+result.street)
+  if(result.error==1){
+    setMessageError(true)
+  }else{
+      setAdress([result.address])
+  setMessage(true)
+  setTimeout(() => {
+    setMessage(false)
+  }, 2000);
+  }
+
+  
 
 
 
   }
+
+
 
   return (
     <div className="container mx-auto    ">
@@ -173,9 +229,25 @@ value="ll;k;"
 </div>
 
       <p className='text-center mt-10 bg-blue-400 text-3xl font-mono'>User adress </p>
-      <div className='bg-slate-300' > 
-{isnew?"":<div className='flex flex-row-reverse flex-wrap justify-center items-center'><p className='text-2xl text-center'>:your address</p><p className='text-center font-bold'>{oldadress}</p> </div>
-}      <div className='w-full h-1/2 grid md:grid-cols-2 grid-cols-1   p-6 '>
+
+
+      <div className='bg-gray-500 flex justify-center items-center flex-col'  >
+      {adress.length>0?(        <p  className='text-base md:text-2xl font-medium'>your address : {adress[0].country+','+adress[0].city+','+adress[0].postal+','+adress[0].street}</p>
+):<p>no adress exist go to your profile and add your address first</p>} 
+<Button onClick={onClick}>
+ Edit address
+</Button>
+<Modal
+  show={open}
+  size="md"
+  popup={true}
+  onClose={()=>setOpen(false)}
+>
+  <Modal.Header />
+  {/* <p className='text-black text-center'>Adress</p> */}
+  <Modal.Body>
+  <div className='bg-slate-300' > 
+     <div className='w-full h-1/2 grid md:grid-cols-2 grid-cols-1   p-6 '>
       <div  > 
         <div className="mb-2 block  ">
           <Label
@@ -262,8 +334,16 @@ value={building}
       <div className='w-full items-center p-2  h-12 flex flex-row-reverse'>
   <Button onClick={async ()=>{await updateAdress()}}>save new address</Button>
 </div>
+{msg&&<p className='text-green-500 font-bold text-lg text-center'>Your adress has been updated</p>
+}
+{msgerror&&<p className='text-red-500 font-bold text-lg text-center'>Your adress id wrong</p>
+}
 </div>
-    </div>
+  </Modal.Body>
+</Modal>
+</div>
+        </div> 
+  
   )
 }
  

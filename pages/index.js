@@ -15,7 +15,7 @@ import { TbMoodEmpty } from 'react-icons/tb';
  import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import  client   from '../lib/prismadb'
-
+import photo from "../public/meat22.jpg"
 
 export default function Home({result})
 {
@@ -55,7 +55,7 @@ if(!validateEmail(EmailList))
   return 
 }
       
-      let response = await fetch("https://nakset.vercel.app/api/unRegistredEmail",{method: 'POST',
+      let response = await fetch("http://localhost:3000/api/unRegistredEmail",{method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             },
@@ -110,8 +110,7 @@ setLoading(false)
   const [EmailList, setEmailList] = useState("");
 
 
-console.log("this is result",result)
-
+ 
 
   // useEffect(() => {
 
@@ -120,8 +119,7 @@ console.log("this is result",result)
   // },[]);
 
   const {data:session}= useSession()
-  console.log(session)
-  return(
+   return(
 <div>
 
   {/*
@@ -185,10 +183,15 @@ className='text-lg sm:text-4xl font-rubik '
 </div>
 */}
 
-<div   className="   flex justify-center items-center">
+<div   className=" relative   flex justify-center items-center">
 
-  <Image src='/2.jpg'  width="2000" height="1000"       />
+  <img src="./meat22.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
+<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
+<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
+<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
+<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
 
+</div >
 
 </div>
 
@@ -200,7 +203,7 @@ className='text-lg sm:text-4xl font-rubik '
 
 
 
- <section className='bg-gray-300   mx-auto break-all  '>
+ <section className=' mx-auto break-all  '>
 <div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
 <p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>{t("text:our categories")}</p>
 </div>
@@ -221,14 +224,14 @@ className='text-lg sm:text-4xl font-rubik '
           <Tab key={res.id} icon={ <ReactCountryFlag key={res.id}
             className=""
             onClick={async()=>{ await handleChangeCountry(res.id)}}
-                                      countryCode={res.name}
+                                      countryCode={res.code}
                                       svg
                                        style={{
 
                                           width: '50px',
                                           height: '100%',
                                        }}
-                                      title="US"
+                                      title={res.name}
                                    />}  />
 
 
@@ -315,7 +318,7 @@ className='text-lg sm:text-4xl font-rubik '
 
       </div>
       
-      <div className='grid grid-cols-2 sm:grid-cols-3   container mx-auto m'>
+      <div className='flex justify-center items-center max-w-7xl flex-wrap container mx-auto m bg-blue-300'>
 
       {loading2&&  (
         <div className="flex justify-center items-center animate-bounce   ">      <Image src="/logo.png" width="100"height="100" ></Image>
@@ -327,7 +330,7 @@ className='text-lg sm:text-4xl font-rubik '
 
         ))}
     {!loading2&&products.length<=0 &&(
-<div className='flex flex-col justify-center items-center h-64 w-screen gr '>
+<div className='flex flex-col  justify-center items-center h-64 w-screen gr '>
     <p className='text-cneter text-2xl font-mono'>No results found</p>
 <TbMoodEmpty color='gray' size={100}></TbMoodEmpty>
 </div>
@@ -398,7 +401,7 @@ className='text-lg sm:text-4xl font-rubik '
           required={true}
           shadow={true}
           onChange={(e)=>{setEmailList(e.target.value)}}
-        />      <Button variant="contained" className="bg-pink-900"  onClick={()=>{handelEmail()}}  >
+        />      <Button variant="contained" className="bg-pink-900 mx-5"  onClick={()=>{handelEmail()}}  >
  <p>{t("text:join now")}</p>
 
     </Button>
@@ -414,14 +417,10 @@ className='text-lg sm:text-4xl font-rubik '
 <p className="text-center text-gray-600">{t("text:social")}</p>
 
  <div className="  flex flex-wrap  content-center place-items-center self-center justify-center   sm:mt-0 sm:justify-center items-center  ">
-         <SocialIcon className="m-3" url="https://twitter.com" ></SocialIcon>
-         <SocialIcon className="m-3" url="https://facebook.com" ></SocialIcon>
-         <SocialIcon className="m-3" url="https://www.linkedin.com/in/hamza-mammadi-303a35247/" ></SocialIcon>
-         <SocialIcon className="m-3" url="https://www.instagram.com" ></SocialIcon>
-         <SocialIcon  className="m-3" url="https://www.tiktok.com" ></SocialIcon>
-         <SocialIcon className="m-3" url="https://hu.pinterest.com/" ></SocialIcon>
-         <SocialIcon className="m-3" url="https://www.twitch.com/" ></SocialIcon>
-         <SocialIcon className="m-3" url="https://www.whatsapp.com/" ></SocialIcon>
+          <SocialIcon className="m-3" url="https://www.facebook.com/TheNakset" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://www.linkedin.com/company/nakset/" ></SocialIcon>
+         <SocialIcon className="m-3" url="https://www.instagram.com/nakset_kft/" ></SocialIcon>
+          <SocialIcon className="m-3" url="https://www.whatsapp.com/" ></SocialIcon>
 
 
 
@@ -432,7 +431,7 @@ className='text-lg sm:text-4xl font-rubik '
        </div>
 
  </section>
-
+<div id="contact"></div>
 </div>
 
         )

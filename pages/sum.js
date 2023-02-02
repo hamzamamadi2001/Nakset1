@@ -13,9 +13,9 @@ function About() {
  
 <div className=' min-h-screen w-screen    bg-gradient-to-r from-cyan-500 to-blue-300 flex flex-col justify-center items-center   '>
 <Text
-    className='text-lg my-5 sm:text-2xl lg:text-4xl bg-slate-50 h-16  '
+    className='text-4xl my-5 sm:text-2xl lg:text-4xl bg-slate-50 h-16  '
      h6
-     size={60}
+    
         css={{
           textGradient: "45deg, $gray600 -20%, $white600 50%",
         }}

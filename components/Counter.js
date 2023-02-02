@@ -18,9 +18,7 @@ if(Number(result) <=1)
     
   };
 
-  console.log(value);
-  console.log(typeof value);
-  console.log(Number(value));
+  
 
   // 👇️ validation
   if (value !== '') {

@@ -43,7 +43,7 @@ items.forEach(ele => {
   
 })
 // console.log("this is the array",arr)
-const getUser = await client.product.findMany({
+const getUser = await prisma.product.findMany({
   where: {
     id: { in: arr},
   },
@@ -56,7 +56,7 @@ const getUser = await client.product.findMany({
   items.forEach(eleclien => {
     if(eleserv.id==eleclien.id) {
       sum += eleserv.price*eleclien.quantity;
-      info.push({name:eleserv.name,quantity:eleclien.quantity,unit:eleserv.unit})
+      info.push({name:eleserv.name,quantity:eleclien.quantity,unit:eleserv.unit,photo:eleserv.photo})
     }
   });
   
@@ -67,9 +67,10 @@ const getUser = await client.product.findMany({
   if(info.length==0){
     return -1
   }
+  console.log("this is user id",userid)
   const getorder = await prisma.order.create({
     data: {
-      userId:userid,
+      userId:parseInt(userid),
       order:JSON.stringify(info),
       date: moment().format("MM/DD/YYYY HH:mm:ss"),
       total :parseFloat((Math.round( sum*curr* 100) / 100).toFixed(2)),

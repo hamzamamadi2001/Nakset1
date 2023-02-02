@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from "next/router";
 import CheckoutForm from "../components/CheckoutForm";
+import {useSession,getSession} from 'next-auth/react'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -11,6 +12,8 @@ import CheckoutForm from "../components/CheckoutForm";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function App() {
+  const {data:session,status}= useSession()
+
   const {locale}=useRouter()
   const [clientSecret, setClientSecret] = React.useState("");
   const items = useSelector((state) => state.counter.items)
@@ -30,7 +33,7 @@ const [error, setError] = useState(null);
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: item,currency:currency,id:1}),
+      body: JSON.stringify({ items: item,currency:currency,id:session.id}),
     })
       .then((res) => res.json())
       .then((data) =>{console.log("this is the response",data);if(data.error==1){setError("your cart is empty");

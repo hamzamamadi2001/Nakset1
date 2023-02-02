@@ -70,7 +70,7 @@ const [order, setRealOrders] = useState(null);
   return (
     < >
             
-    <div className='container mx-auto mt-20 grid grid-flow-row gap-1   '>
+    <div className='container mx-auto min-h-screen   grid grid-flow-row gap-1   '>
   
  {orders && orders.map((ele) => (
     <div key={res.id} className='mb-8 bg-gray-500'>

@@ -29,10 +29,7 @@ if(Number(result) <=1)
     
   };
 
-  console.log(value);
-  console.log(typeof value);
-  console.log(Number(value));
-
+  
   // 👇️ validation
   if (value !== '') {
     const num = Number(value);
@@ -41,7 +38,7 @@ if(Number(result) <=1)
   return (
      
       
-     <div className=' w-26 m-auto   my-4   bg-white flex flex-col justify-center items-center rounded-lg' >
+     <div className=' w-26 m-auto   my-4 border-black border-2 shadow-sm-light shadow-black  bg-white flex flex-col justify-center items-center rounded-lg' >
       <Image src={src} width={100} height={150}></Image>
     <h6 className="text-lg text-center font-bold font-oleo tracking-tight text-gray-900 dark:text-white">
     {title}
@@ -60,7 +57,7 @@ if(Number(result) <=1)
         value={(Math.round( value*parseFloat(baseQuantity)* 100) / 100).toFixed(2)}
         onChange={handleChange}
       />
-      <AiFillPlusCircle onClick={()=>{console.log(value+1);  setValue(value=>value+1)}}   size={30}></AiFillPlusCircle>
+      <AiFillPlusCircle onClick={()=>{   setValue(value=>value+1)}}   size={30}></AiFillPlusCircle>
 </div>
 <Button onClick={()=>{dispatch(addProduct({id:id,price:price*value,name:title,weight:unit,photo:src,quantity:value,priceUnit:price,baseQuantity:baseQuantity}))}}  className='m-2' >
       <MdAddShoppingCart   />

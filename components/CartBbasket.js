@@ -9,7 +9,7 @@ import { adjustQuantity, removeProduct} from '../slices/CounterSlice'
 import {Table}from "flowbite-react";
 
 
-function About({price,src,name,currency,baseQuantity,weight,idx,quantity,currencyValue}) {
+function About({price,src,name,currency,unit,baseQuantity,weight,idx,quantity,currencyValue}) {
     const gprice = useSelector((state) => state.counter.items[idx].price)
    
 
@@ -45,18 +45,18 @@ if(Number(result) <=1)
 
 
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-    <Table.Cell>
-     <Image src={src} width="100" height='100'></Image> 
- 
-      </Table.Cell>
-      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-      <p className='text-black text-base text-center '>{name}</p>
-      </Table.Cell>
-      <Table.Cell>
-      <p className='text-black text-2xl    text-center'>{(Math.round( parseFloat(price)*currencyValue* 100) / 100).toFixed(2)+currency+" for "+baseQuantity+" "+weight}</p>
+    <Table.Cell className="whitespace-nowrap   font-medium text-gray-900 dark:text-white">
+      <div className='flex items-center md:flex-row flex-col justify-center'>
+        <div className='flex justify-center items-center flex-col'>
+        <Image src={src} width="100" height='100'></Image> 
+     <p className='text-white w-full text-base text-center font-mono my-1 bg-green-900'>{name}</p>
+     <p className='text-black text-2xl  bg-amber-300  text-center'>{(Math.round( parseFloat(price)*currencyValue* 100) / 100).toFixed(2)+currency+" for "+baseQuantity+" "+weight}</p>
 
-      </Table.Cell>
-      <Table.Cell className='flex justify-center  items-center'>
+        </div>
+     
+     {/* <p className='text-black text-2xl    text-start'>{(Math.round( parseFloat(price)*currencyValue* 100) / 100).toFixed(2)+currency}</p>
+     <p>for{baseQuantity+" "+weight} </p> */}
+<div className='w-full flex justify-center items-center'>
      <AiFillMinusCircle onClick={()=>{if(value-1<1) {setValue(1);dispatch(adjustQuantity({quantity:1,idx:idx})) }else {dispatch(adjustQuantity({quantity:value-1,idx:idx}));setValue(value-1) }}} size={30}></AiFillMinusCircle>
     <input
     className='w-24'
@@ -65,14 +65,20 @@ if(Number(result) <=1)
         value={(Math.round(value*baseQuantity* 100) / 100).toFixed(2)}
         onChange={handleChange}
       />
-      <AiFillPlusCircle onClick={()=>{  dispatch(adjustQuantity({quantity:value+1,idx:idx}));setValue(value+1);}}   size={30}></AiFillPlusCircle>
-       </Table.Cell>
-      <Table.Cell>
-      <p className=' text-black text-2xl  text-center'>{(Math.round( gprice*currencyValue* 100) / 100).toFixed(2)+currency}</p>
+      <AiFillPlusCircle onClick={()=>{  dispatch(adjustQuantity({quantity:value+1,idx:idx}));setValue(value+1);}}   size={30}></AiFillPlusCircle></div>
+      
+      <p className=' text-black text-2xl  text-start'>{(Math.round( gprice*currencyValue* 100) / 100).toFixed(2)+currency}</p>
+       </div>
       </Table.Cell>
-      <Table.Cell className='flex justify-center  items-center   ' >
+     
+      {/* <Table.Cell>
 
-      <AiFillDelete cursor='pointer'  onClick={()=>dispatch(removeProduct({idx:idx}))} color='red' size={20}></AiFillDelete>
+      </Table.Cell> */}
+     
+      
+      <Table.Cell className='flex justify-center  items-center h-20  ' >
+
+      <AiFillDelete className='flex justify-center  items-center h-full  ' cursor='pointer'  onClick={()=>dispatch(removeProduct({idx:idx}))} color='red' size={20}></AiFillDelete>
 
       </Table.Cell>
     </Table.Row>

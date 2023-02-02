@@ -1,55 +1,4 @@
- import {hash} from "bcrypt"
- import  prisma   from '../../lib/prismadb'
-
- export default async function handler(req ,res ){
-  console.log("i am in registation")
-
-  const validateEmail = (email) => {
-    if(email == undefined || email==null) { return false}
-          var result = String(email)
-      .toLowerCase()
-      .match(
-        /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/   );
-        if(result==null)  {  return false}
-        else{ return true}
-
-  };
-  if((typeof(req.body.password)!="string" ||req.body.password.length<8 ||typeof(req.body.email)!="string"||validateEmail(req.body.email)==false||typeof(req.body.username)!="string" ||  req.body.username.length<=0 )){
-    return res.status(401).json({result:{error:1,result,message:"Invalid information"}}) 
-   }
-  
-  let exist =  await   prisma.user.findUnique({ where: {
-    email: req.body.email
-  },})
-  console.log(exist)
-  if(exist){
-   return res.status(400).json({result:{error:1,message:"invalid information"}})  
-  }
-
-hash(req.body.password, 10).then( async function(hash) {
-const result = await prisma.user.create({data:{email:req.body.email,password:hash,provider:"credentials",name:req.body.username,photo:"https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg"}}).finally(async()=>{prisma.$disconnect()})
-      console.log(result)
-  console.log("i am in 3333",result)
-  if(result){
-    let nodemailer = require('nodemailer')
-  const transporter = nodemailer.createTransport({
-    port: 465,
-   
-    host: "smtp.gmail.com",
-    auth: {
-      user: 'hamzamamadi39@gmail.com',
-      pass:'cqglihvtoiydsjia',
-    }, tls: {
-      rejectUnauthorized: false
-    },
-    secure: true,
-  })
-  const mailData = {
-    from :'hamzamamadi39@gmail.com',
-    to: req.body.email,
-    subject: `welcome to nakset`,
-    text: "registration completed" ,
-    html:  `<!DOCTYPE html>
+<!DOCTYPE html>
     <!--Code By Webdevtrick ( https://webdevtrick.com )-->
     <html lang="en">
     
@@ -87,9 +36,15 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
                     <tr>
                       <td align="center"bgcolor="#66809b" style="font-family: 'Raleway', sans-serif; font-size:37px; color:#001391;; line-height:24px; font-weight: bold; letter-spacing: 5px;">
                         WELCOME to Nakset
+                      
                       </td>
                     </tr>
-    
+                    <tr>
+                      <td align="center"bgcolor="#66809b" style="font-family: 'Raleway', sans-serif; font-size:20px; color:#001391;; line-height:24px; font-weight: bold; letter-spacing: 5px;">
+                       News letters
+                      
+                      </td>
+                    </tr>
     
     
     
@@ -149,7 +104,7 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
                         <table class="col3_one" width="380" border="0" align="right" cellpadding="0" cellspacing="0">
     
                           <tbody><tr align="left" valign="top">
-                            <td style="font-family: 'Raleway', sans-serif; font-size:20px; color:#fbb016; line-height:30px; font-weight: bold;">Hi ${req.body.username}  </td>
+                            <td style="font-family: 'Raleway', sans-serif; font-size:20px; color:#fbb016; line-height:30px; font-weight: bold;">Hi User  </td>
                           </tr>
     
     
@@ -160,8 +115,7 @@ const result = await prisma.user.create({data:{email:req.body.email,password:has
     
                           <tr align="left" valign="top">
                             <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height:24px; font-weight: 300;">
-                                your registration has been completed and we willing to you yo enjoy halal food with us and sharing it with your friends
-                            </td>
+Now you can recive the latest updates about our products , offers and more dont forget to register in the webiste to can order the halal food                          </td>
                           </tr>
     
                           <tr>
@@ -408,22 +362,4 @@ these are the most important certeficates that we have in our company.We are ver
             </tbody></table>
       
     </body>
-    </html>`
-  }
-  transporter.sendMail(mailData, function (err, info) {
-    if(err)
-      console.log(err)
-    else
-      console.log(info)
-  })
-  }
-  
-
-     return res.status(200).json({result:{error:0,result,password:req.body.password}}) 
-
- });
-                   
-
-  
-  
-}
+    </html>
