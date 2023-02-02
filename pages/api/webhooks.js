@@ -6,7 +6,7 @@ import  prisma   from '../../lib/prismadb'
 
 
 // Find your endpoint's secret in your Dashboard's webhook settings
-const endpointSecret = "whsec_e2792184666d17c0c65a68433b822e5f4bf079208fca0462ba106307323fbfd3";
+const endpointSecret = "whsec_l7XOcLpjQ221SXHsXD5eyI3eietbhmLY";
 
 export const config = {
     api: {
