@@ -88,6 +88,7 @@ switch (event.type) {
         },
       
       })
+      await prisma.$disconnect()
       let nodemailer = require('nodemailer')
       const transporter = nodemailer.createTransport({
         port: 465,
