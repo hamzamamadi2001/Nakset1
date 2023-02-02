@@ -4,11 +4,9 @@ import {compare} from "bcrypt"
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client"
-  
+import  prisma   from '../../../lib/prismadb'
 
-
-const prisma = new PrismaClient()
+ 
 
 //  const client_id='586371651783-6emvrgpkcghil5kn99vafvtt2piraoeq.apps.googleusercontent.com'
 // const client_secret='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'
@@ -86,7 +84,7 @@ export const authOptions = {
                 let result =  await   prisma.user.findUnique({ where: {
                   email:   token.email?token.email:token.picture.split('=')[1].split('&')[0]
                 }
-                ,}).finally(async()=>{prisma.$disconnect()})
+                ,}) 
                  
                 
                 
@@ -109,7 +107,7 @@ export const authOptions = {
                     password:'',
            provider :token.provider?token.provider:"facebook",
            photo :token.image?token.image:token.picture
-                  },}).finally(async()=>{prisma.$disconnect()})
+                  },}) 
                   if(token.email!=undefined && token.email!=null){
                     let nodemailer = require('nodemailer')
                     const transporter = nodemailer.createTransport({

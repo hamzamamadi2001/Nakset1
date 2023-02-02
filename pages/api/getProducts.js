@@ -6,7 +6,7 @@ import  prisma   from '../../lib/prismadb'
 
 
 
-  const products = await prisma.product.findMany({where:{city:req.body.city,categoryId:req.body.catid}}).finally(async()=>{prisma.$disconnect()})
+  const products = await prisma.product.findMany({where:{city:req.body.city,categoryId:req.body.catid}}) 
 
   console.log("i am in cat", products)
 

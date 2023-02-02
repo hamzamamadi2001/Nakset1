@@ -29,8 +29,7 @@
 
 hash(req.body.password, 10).then( async function(hash) {
 const result = await prisma.user.create({data:{email:req.body.email,password:hash,provider:"credentials",name:req.body.username,photo:"https://static.vecteezy.com/system/resources/previews/000/574/512/large_2x/vector-sign-of-user-icon.jpg"}}).finally(async()=>{prisma.$disconnect()})
-await prisma.$disconnect()      
-console.log(result)
+ console.log(result)
   console.log("i am in 3333",result)
   if(result){
     let nodemailer = require('nodemailer')

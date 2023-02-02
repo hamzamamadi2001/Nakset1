@@ -8,7 +8,7 @@ import { getToken } from "next-auth/jwt"
  
 const token = await getToken({ req})
 if (token) {
-    const address = await prisma.address.findMany({where:{id:token.id}}).finally(async()=>{prisma.$disconnect()})
+    const address = await prisma.address.findMany({where:{id:token.id}}) 
     
 if(address.length<=0){
    neww = true
@@ -16,8 +16,8 @@ if(address.length<=0){
     adress=address[0].country+","+address[0].city+","+address[0].postal+","+address[0].street
 
 }
-    const countrys = await prisma.countrys.findMany().finally(async()=>{prisma.$disconnect()})
-   const citys = await prisma.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}).finally(async()=>{prisma.$disconnect()})
+    const countrys = await prisma.countrys.findMany() 
+   const citys = await prisma.citys.findMany({where:{country:countrys[0].id},select:{id:true,name:true}}) 
 
 
    

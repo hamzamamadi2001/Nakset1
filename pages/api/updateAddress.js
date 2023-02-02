@@ -33,8 +33,7 @@ export default async (req, res) => {
 
 
       },}).finally(async()=>{prisma.$disconnect()})
-      await prisma.$disconnect()
-    console.log(address)
+     console.log(address)
       res.status(200).json({address:address,error:0})
     
   } else {

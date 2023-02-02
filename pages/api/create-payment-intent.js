@@ -47,7 +47,7 @@ const getUser = await prisma.product.findMany({
   where: {
     id: { in: arr},
   },
-}).finally(async()=>{prisma.$disconnect()})
+}) 
   var sum=0;
   var info=[]
   try {
@@ -79,7 +79,7 @@ const getUser = await prisma.product.findMany({
   currencyValue:curr
      
     },
-  }).finally(async()=>{prisma.$disconnect()})
+  }) 
    
  console.log("this is the currency from the api",curr)
  return  {sum:(Math.round( sum*curr* 100) / 100).toFixed(2),orderID:getorder.id}

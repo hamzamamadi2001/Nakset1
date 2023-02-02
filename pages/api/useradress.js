@@ -11,8 +11,7 @@ export default async (req, res) => {
 console.log("this is the token",token)
 
     const categories = await prisma.address.findMany({where:{id:token.id}})
-      await prisma.$disconnect()
-    console.log(categories)
+     console.log(categories)
    if(categories.length>0){
         delete categories[0].id
 
