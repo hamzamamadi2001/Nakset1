@@ -24,11 +24,11 @@ let persistor = persistStore(store)
         <title>My page title</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-{router.pathname=="/sum"?null: <Nav></Nav>}
+  <Nav></Nav>
            <Component {...pageProps} />
 
 
-           {router.pathname=="/sum"||router.pathname=="/basket"?null:<Fot></Fot>}
+           {router.pathname=="/About"||router.pathname=="/products"?null:<Fot></Fot>}
     </SessionProvider>
              </Provider></PersistGate>)
           }

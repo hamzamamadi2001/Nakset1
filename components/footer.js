@@ -50,10 +50,10 @@ export default function App() {
      
         };
   return (
-<Footer className="w-full bg-blue-800 rounded-none mt-10" container={true}>
+<Footer className="w-full rounded-none mt-10" container={true}>
   <div className="w-full  ">
-    <div className="grid w-full grid-cols-1 justify-between sm:flex sm:justify-between md:flex md:grid-cols-2">
-      <div className="flex flex-col w-full justify-center md:w-1/2">
+   <div className="flex flex-wrap justify-center items-center">
+     {/*   <div className="flex flex-col w-full justify-center md:w-1/2">
       <p className='text-center text-yellow-500 text-5xl md:text-6xl font-tar  my-2  '>{t("text:contact us")}</p>
 
 
@@ -93,18 +93,18 @@ export default function App() {
      </Button>
 
 
-      </div>
-      <div className="mx-5 grid grid-cols-2 gap-8 sm:mt-4    ">
+      </div> */}
+      <div className="mx-5 flex flex-wrap justify-center items-center gap-8 sm:mt-4    ">
 
         <div>
           <p className="text-yellow-500 mb-5">{t("text:hours of work")}</p>
  
           <lu>
-            <li className="text-white">Monday from ... to ...</li>
-            <li className="text-white">Tuesday from ... to ...</li>
-            <li className="text-white">Wedensday from ... to ...</li>
-            <li className="text-white">Thursday from ... to ...</li>
-            <li className="text-white">Friday from ... to ...</li>
+            <li className="text-black">Monday from ... to ...</li>
+            <li className="text-black">Tuesday from ... to ...</li>
+            <li className="text-black">Wedensday from ... to ...</li>
+            <li className="text-black">Thursday from ... to ...</li>
+            <li className="text-black">Friday from ... to ...</li>
 
 
           </lu>
@@ -114,10 +114,10 @@ export default function App() {
 
           <Footer.LinkGroup col={true}>
             <Footer.Link href="/">
-           <p className="text-white"> {t("text:privacy plicy")}</p>
+           <p className="text-black"> {t("text:privacy plicy")}</p>
             </Footer.Link>
             <Footer.Link href="/">
-           <p className="text-white"> {t("text:terms and conditions")}</p>
+           <p className="text-black"> {t("text:terms and conditions")}</p>
 
              </Footer.Link>
           </Footer.LinkGroup>
@@ -125,7 +125,7 @@ export default function App() {
       </div>
     </div>
     <Footer.Divider />
-    <div className="w-full sm:flex sm:items-center sm:justify-between">
+    <div className="w-full  bg-blue-800 sm:flex sm:items-center sm:justify-between">
       <Footer.Copyright
       color="white"
     className="text-white bg-white"

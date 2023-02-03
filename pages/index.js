@@ -2,37 +2,52 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useState, useEffect } from "react";
 import useTranslation from 'next-translate/useTranslation'
- import { Spinner,TextInput } from "flowbite-react";
+ import {  Carousel,Textarea } from "flowbite-react";
 import { SocialIcon } from 'react-social-icons';
-import  Card2 from '../components/CardPro'
- import Image from 'next/image'
+  import Image from 'next/image'
 import {useSession} from 'next-auth/react'
- import ReactCountryFlag from "react-country-flag"
-import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import { TbMoodEmpty } from 'react-icons/tb';
- import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import  client   from '../lib/prismadb'
- 
+ import ReactPlayer from 'react-player'
+
 export default function Home({result})
 {
-  const [value, setValue] =  useState(0);
+    const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
 
+  const {t} = useTranslation()
+
+ 
+  
+  const validName = (name) => {
+    var name = name.replace(/^[ ]+/g, "");
+    if(name.length==0 || name=="" || name==null || name==undefined ||   name==" " ) {return false}
+    return true
+  };
+  
+  const validMessage = (message) => {
+    var name = message.replace(/^[ ]+/g, "");
+    if(name.length==0 || name=="" || name==null || name==undefined ||   name==" " ) {return false}
+    return true
+
+  };
+  const sendMessage =async () => {
+
+    if(!validateEmail(email)||!validName(name)||!validMessage(message))
+    {
+      return 
+    }
+          
+          let response = await fetch("https://nakset1.vercel.app/api/sendMessage",{method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({email:email,name:name,message:message})});
+               let result = await response.json(response);
+     
+        };
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-   const [chosencity, setChosenCity] = useState(result[2][0].id);
-  const [chosencat, setChosenCat] = useState(result[0][0].id);
-
-  const [products, setProducts] = useState(result[3]);
-
-   const [city, setCity] = useState(result[2]);
-  
-  const [loading, setLoading] =  useState(false);
-  const [loading2, setLoading2] =  useState(false);
-   const [emailError, setEmailError] =  useState(false);
+  }; 
  
 
 
@@ -41,72 +56,19 @@ export default function Home({result})
       .toLowerCase()
       .match(
         /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/   );
-        if(result==null)  {setEmailError(true);  return false}
-        else{setEmailError(false);return true}
+        if(result==null)  {   return false}
+        else{ return true}
 
   };
   
    
-    const handelEmail =async () => {
-
-if(!validateEmail(EmailList))
-{
-  return 
-}
-      
-      let response = await fetch("http://localhost:3000/api/unRegistredEmail",{method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({email:EmailList})});
-           let result = await response.json(response);
-          if(result.error==0){
-            setEmailError(false)
-          }
-           else{
-            setEmailError(true)
-          }
-
-    };
-
-
-  const handleChangeCity = (event) => {
-    setChosenCity(event.target.value);
-  };
-  const handleChangeCategory = (event) => {
-    setChosenCat(event.target.value);
-  };
-
-  const handleChangeCountry =async (id) => {
-    setLoading(true)
-    let response = await fetch("https://nakset.vercel.app/api/getCitys",{method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({id:id})});
-         let result = await response.json(response);
-         setCity(result)
-setLoading(false)
-   };
-  const handleSearch =async (id) => {
-
-
-    setLoading2(true)
-    let response = await fetch("https://nakset.vercel.app/api/getProducts",{method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({catid:parseInt(chosencat),city:chosencity})});
-         let result = await response.json(response);
-         setProducts(result)
-  setLoading2(false)
-   };
+    
+ 
+  
 
 
 
-
-  const {t} = useTranslation()
-  const [EmailList, setEmailList] = useState("");
+   const [email, setEmailList] = useState("");
 
 
  
@@ -120,235 +82,119 @@ setLoading(false)
   const {data:session}= useSession()
    return(
 <div>
-
-  {/*
-<div className='flex flex-wrap relative  mx-auto'>
-  <div className=' m-auto w-full h-full sm:w-full sm:max-w-5xl'>
-  <Image src='/Nakseth.png' className='w-full h-full' width={700} height={700}   />
-  </div>
-  <div className='sm:absolute sm:left-1/2 sm:bottom-1/2 sm:translate-y-1/2 sm:-translate-x-1/2 backdrop-filter backdrop-blur-sm  w-full bg-zinc-800 bg-opacity-30 h-full   m-auto flex  flex-wrap md:flex-col justify-center content-center items-center'>
-   <Image src='/logo.png'  width={300} height={300}   />
-  <div className='bg-black bg-opacity-60 rounded-md w-full pb-4 flex flex-col justify-center items-center'>
-   <Text
-    className='text-base sm:text-2xl lg:text-4xl bg-slate-50 font-rubik'
-     h6
-     size={60}
-        css={{
-          textGradient: "45deg, $blue600 -20%, $pink600 50%",
-        }}
-        weight="bold"
-      >
-        The place where you find
-      </Text>
-
-      <Text
-
-className='text-lg sm:text-4xl font-rubik '
-        h1
-        size={60}
-        css={{
-          textGradient: "45deg, $yellow600 -20%, $red600 100%",
-        }}
-        weight="bold"
-      >
-        HALAL food
-      </Text>
-      </div>
-      <div className='flex'>
-
-          <Link href='Products'><Button
-      size="xl"
-      className='m-3'
-      outline={true}
-
-      gradientDuoTone="purpleToBlue"
-    >
-       <Text className='text-xl font-lor  '>Order now</Text>
-    </Button ></Link>
-    <Link href='Products'><Button
-      size="xl"
-      className='m-3 hover:text-white'
-      outline={true}
-
-      gradientDuoTone="purpleToBlue"
-    >
-    <Text className='text-xl font-lor   '>More about us</Text>
-    </Button></Link>
-
-      </div>
-
-
-  </div>
-</div>
-*/}
-
+ 
+<Carousel slideInterval={5000}>
 <div   className=" relative   flex justify-center items-center">
 
-  <img src="./meat22.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
+  
+    <img src="./4.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
 <div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
 <p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
 <p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
 <Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
 
+  
+  
+</div >
+ 
+
+</div>
+
+
+<div   className=" relative   flex justify-center items-center">
+
+  
+    <img src="./5.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
+<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
+<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
+<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
+<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+
+  
+  
+</div >
+ 
+
+</div>
+
+
+
+
+<div   className=" relative   flex justify-center items-center">
+
+  
+    <img src="./3.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
+<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
+<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
+<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
+<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+
+  
+  
+</div >
+ 
+
+</div>
+
+
+
+<div   className=" relative   flex justify-center items-center">
+
+  
+    <img src="./1.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
+<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
+<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
+<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
+<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+
+  
+  
+</div >
+ 
+
+</div>
+</Carousel>
+
+<section className="mt-28">
+<div className="flex justify-center items-center flex-row-reverse flex-wrap">
+      <h2 className="text-black font-bold text-5xl font-tar">"A taste felt in hearts"</h2>
+      <ReactPlayer url='https://www.youtube.com/watch?v=wWgIAphfn2U' />
+    </div>
+</section>
+
+<section className="mt-28">
+<div   className=" relative   flex justify-center items-center">
+
+  
+<img src="./2.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-1/4  "      />
+<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-black  bg-opacity-60     ">
+<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Are you carbing calling?</p>
+<Button variant="outlined" style={{borderColor:"white",color:"white",borderRadius:"30%",letterSpacing:"5px",marginTop:"5px"}}   className="bg-white text-blue-50">Our products</Button>
+
+
+
+
 </div >
 
+
 </div>
-
-
-
-
-
-
-
-
-
- <section className=' mx-auto break-all  '>
-<div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
-<p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>{t("text:our categories")}</p>
-</div>
-
-
-
-
-
-
-
-
-      <div className="bg-blue-300 flex justify-evenly items-center">
-      <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <Tabs value={value} onChange={handleChange} centered>
-        {result[1].map((res) => (
-
-
-          <Tab key={res.id} icon={ <ReactCountryFlag key={res.id}
-            className=""
-            onClick={async()=>{ await handleChangeCountry(res.id)}}
-                                      countryCode={res.code}
-                                      svg
-                                       style={{
-
-                                          width: '50px',
-                                          height: '100%',
-                                       }}
-                                      title={res.name}
-                                   />}  />
-
-
-
-
-
-
-             ))}
-
-        </Tabs>
-      </Box>
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-      <div className="bg-blue-200   flex justify-center items-center flex-col-reverse md:flex-row" >
-      <Button variant="contained" onClick={async()=>{await handleSearch()}} className="bg-green-500 my-1">search</Button>
-
-      <div className="mx-10 my-1">
-
-
-      <Box  className="flex flex-row-reverse justify-center items-center w-auto "  >
-      <InputLabel id="demo-simple-select-autowidth-label">categories</InputLabel>
-
-      <select className="rounded-lg" value={chosencat} onChange={(e)=>{handleChangeCategory(e)}}>
-
-
-        {result[0].map((res,index) =>{
-          if(index==0)
-          return(  <option key={res.id} value={res.id}>{res.name}</option>
-          )
-          else
-          return (
-           <option key={res.id} value={res.id}>{res.name}</option>
-
-                  )})}
-                  </select>
-
-
-     </Box>
-
-
-
-
-
-
-
-      </div>
-
-
-      <div className="mx-10 my-1">
-
-      <Box className="flex flex-row-reverse justify-center items-center w-auto "  >
-      <InputLabel id="demo-simple-select-autowidth-label">City</InputLabel>
-{loading&&(<Spinner
-    aria-label="Medium sized spinner example"
-    size="md"
-  />)}
-       { !loading &&city.length>0&&(<select className="rounded-lg" value={chosencity} onChange={(e)=>{handleChangeCity(e)}}>
-
-
-        {city.map((res,index) =>{
-          if(index==0)
-          return(  <option key={res.id} value={res.id}>{res.name}</option>
-          )
-          else
-          return (
-           <option key={res.id}  value={res.id}>{res.name}</option>
-
-                  )})}
-                  </select>)}
-                  { !loading &&city.length<=0&&(<p >👍😎caming soon</p>)}
-     </Box>
-                      </div>
-
-
-      </div>
-      
-      <div className='flex justify-center items-center max-w-7xl flex-wrap container mx-auto m bg-blue-300'>
-
-      {loading2&&  (
-        <div className="flex justify-center items-center animate-bounce   ">      <Image src="/logo.png" width="100"height="100" ></Image>
-  </div>
-      )}
-  {!loading2 && products.length>0 && products.map((res) => (
-  <Card2  key={res.id} src={res.photo}  title={res.name} unit={res.unit} price={res.price} id={res.id} baseQuantity={res.baseQuantity}></Card2>
-
-
-        ))}
-    {!loading2&&products.length<=0 &&(
-<div className='flex flex-col  justify-center items-center h-64 w-screen gr '>
-    <p className='text-cneter text-2xl font-mono'>No results found</p>
-<TbMoodEmpty color='gray' size={100}></TbMoodEmpty>
-</div>
-    )}
-  </div>
-  
-
  </section>
- <section className='container mx-auto flex flex-col justify-between items-center  text-center '>
+
+
+
+
+ 
+ <section className='container mx-auto flex flex-col justify-between items-center  text-center mt-48'>
 <div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
-<p className= 'text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>{t("text:how it works")}</p>
+<p className= 'text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our goals</p>
 </div>
 
 <div className='flex flex-col sm:flex-row container mx-auto justify-center items-center align-middle '>
       <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
 
       <div className='flex flex-col justify-center items-center'>
-      <Image src='/lahm.svg' width={100} height={100}   />
-      <p className='text-3xl text-center text-red-800'>{t("text:choose your favorite")}</p>
+      <Image src='/mission.png' width={150} height={150}   />
+      <p className='text-3xl text-center text-black'>Mission</p>
 
 
       </div>
@@ -360,8 +206,8 @@ className='text-lg sm:text-4xl font-rubik '
     <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
 
       <div className='flex flex-col justify-center items-center'>
-      <Image src='/deliv.svg' width={100} height={100}    />
-      <p className='text-3xl text-center text-red-800'>{t("text:we deliver your meals")}</p>
+      <Image src='/values.png' width={150} height={150}    />
+      <p className='text-3xl text-center text-black'>Values</p>
 
 
       </div>
@@ -373,8 +219,8 @@ className='text-lg sm:text-4xl font-rubik '
     <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
 
       <div className='flex flex-col justify-center items-center'>
-      <Image src='/grill.svg' width={100} height={100}     />
-      <p className='text-3xl text-center text-red-800'>{t("text:enjoy halal food")}</p>
+      <Image src='/vision.png' width={150} height={150}     />
+      <p className='text-3xl text-center text-black'>Vision</p>
 
 
       </div>
@@ -385,7 +231,47 @@ className='text-lg sm:text-4xl font-rubik '
 </div>
 
 </section>
-<section className='bg-gray-100     break-all  '>
+
+
+<section className='container mx-auto flex flex-col justify-between items-center mt-48 text-center '>
+<div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
+<p className= 'text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our certficates</p>
+</div>
+
+<div className='flex flex-col sm:flex-row container mx-auto justify-center items-center align-middle '>
+      <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
+
+      <div className='flex flex-col justify-center items-center'>
+      <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/haccp_vi97me.png' width={300} height={300}   />
+ 
+
+      </div>
+    
+    </div>
+
+    <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
+
+      <div className='flex flex-col justify-center items-center'>
+      <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/halal_nu6njq.jpg' width={300} height={300}    />
+ 
+
+      </div>
+      
+    </div>
+
+    <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
+
+      <div className='flex flex-col justify-center items-center'>
+      <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/iso_viirsy.jpg' width={300} height={300}     />
+ 
+
+      </div>
+     
+    </div>
+</div>
+
+</section>
+{/* <section className='bg-gray-100     break-all  '>
 <div className='text-center   flex flex-col justify-center items-center'>
 <p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>{t("text:our mailing list")}</p>
 </div>
@@ -406,10 +292,63 @@ className='text-lg sm:text-4xl font-rubik '
     </Button>
       </div>
 {emailError?<p className="bg-gray-300 text-red-700 my-10 font-bold text-center ">wrong email address </p>:(<></>)}
- </section>
+ </section> */}
 
 
- <section className='bg-white   mx-auto break-all  '>
+ 
+ 
+<div id="contact" className="flex flex-col w-full justify-center items-center min-w-1/2 mt-48">
+      <p className='text-center text-yellow-500 text-5xl md:text-8xl font-tar  my-2  '>{t("text:contact us")}</p>
+
+
+         
+          <input
+          style={{borderTop:"0px solid white",borderBottom:"1px solid gray",borderRight:"0px solid white",borderLeft:"0px solid white",}}
+         className= "mb-5 w-1/2 "
+           id="Email"
+           type="text"
+           placeholder={t("text:your name")}
+           required={true}
+           shadow={true}
+           onChange={(e)=>{setName(e.target.value)}}
+         />
+         <input
+                   style={{borderTop:"0px solid white",borderBottom:"1px solid gray",borderRight:"0px solid white",borderLeft:"0px solid white",}}
+
+         className= "mb-5 w-1/2"
+           id="Email"
+           type="Email"
+           placeholder={t("text:your email")}
+           required={true}
+           shadow={true}
+           onChange={(e)=>{setEmailList(e.target.value)}}
+         />
+       <textarea
+    id="comment"
+    style={{borderTop:"0px solid white",borderBottom:"1px solid gray",borderRight:"0px solid white",borderLeft:"0px solid white",}}
+
+    rows={4} 
+    cols={40}
+    className="mb-5 w-1/2"
+    placeholder={t("text:write message")}
+    required={true}
+    onChange={(e)=>{setMessage(e.target.value)}}
+
+   
+  />
+
+
+           <div className="w-auto   p-5">
+  <Button variant="outlined" onClick={async()=>{await sendMessage()}} style={{borderColor:"black",color:"black",borderRadius:"30%",letterSpacing:"5px",marginTop:"5px",width:"100%"}}   className="bg-white text-blue-50">Send message</Button>
+</div>
+
+ 
+
+      </div>
+
+
+
+      <section className='bg-white   mx-auto break-all mt-48 '>
 <div className='text-center   flex flex-col justify-center items-center'>
 <p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Social</p>
 </div>
@@ -430,7 +369,6 @@ className='text-lg sm:text-4xl font-rubik '
        </div>
 
  </section>
-<div id="contact"></div>
 </div>
 
         )
@@ -443,22 +381,11 @@ export async function getServerSideProps(context) {
 
 // let result2 = await response.json()
 // console.log(result2)
-
-
-
-const categories = await client.category.findMany({select:{id:true,name:true}}) 
-   const countrys = await client.countrys.findMany({where:{}}) 
-   const citys = await client.citys.findMany({where:{country:0},select:{id:true,name:true}})
-   await client.$disconnect()
-
-  const products = await client.product.findMany({where:{city:citys[0].id}})
-     await client.$disconnect()
- let result=
- [ categories,countrys,citys,products]
+ 
  
 
 return {
-  props: { result }, // will be passed to the page component as props
+  props: {  }, // will be passed to the page component as props
 }
 
 }

@@ -91,15 +91,15 @@ const [language, setLanguage] = useState('US');
 
   return (
 <div>
-    <Navbar style={{borderBottom: '1px solid gray'}}
-  className="w-full  z-50 fixed  flex-col-reverse  shadow-2xl backdrop-filter b    rounded-r-lg  bg-blue-800  bg-opacity-75  backdrop-blur-sm    flex justify-center items-center "
+    <Navbar 
+  className="w-full  z-50 fixed  flex-col-reverse  shadow-2xl backdrop-filter b    rounded-r-lg  bg-slate-900  bg-opacity-40  backdrop-blur-sm    flex justify-center items-center "
 
 >
 
 
 
   <Navbar.Brand className="hidden md:block " href="/">
-    <p className="text-white font-bold text-3xl">Nakset</p>
+    <Image src="/logo2.png" width="100" height="100"></Image>
   </Navbar.Brand>
 
    <div className="flex flex-wrap justify-center items-center">
@@ -110,13 +110,13 @@ const [language, setLanguage] = useState('US');
     <p className="text-white  ">{t("text:home")}</p>
     </Navbar.Link></div>
     <div className=" h-10 hover:border-b-2 hover:border-b-yellow-300 flex justify-center items-center">
-    <Navbar.Link className="mx-2  " href="/">
+    <Navbar.Link className="mx-2  " href="/About">
       <p className="text-white">{t("text:about us")}</p>
     </Navbar.Link>
     </div>
     <div className=" h-10 hover:border-b-2 hover:border-b-yellow-300 flex justify-center items-center">
-    <Navbar.Link className="mx-2   " href="/orders">
-      <p className="text-white">my orders</p>
+    <Navbar.Link className="mx-2   " href="/products">
+      <p className="text-white">products</p>
     </Navbar.Link>
     </div>
     <div className=" h-10 hover:border-b-2 hover:border-b-yellow-300 flex justify-center items-center">
@@ -134,32 +134,7 @@ const [language, setLanguage] = useState('US');
 
 
 
-  <Dropdown
-
-
-  arrowIcon={false}
-  inline={true}
-  label={ <p className="text-white text-base mx-2">{curr.toUpperCase()}</p>}
-
-
->
-
-
-  <Dropdown.Item onClick={()=>dispatch(adjustcurr({curr:"huf",sym:"ft",value:huf}))} >
-  <p className="text-black text-base">HUF</p>
-  </Dropdown.Item>
-  <Dropdown.Divider />
-  <Dropdown.Item onClick={()=>dispatch(adjustcurr({curr:"usd",sym:"$",value:usd}))}>
-  <p className="text-black text-base">USD</p>
-  </Dropdown.Item>
-  <Dropdown.Divider />
-  <Dropdown.Item  onClick={()=>dispatch(adjustcurr({curr:"eur",sym:"€",value:1}))}>
-   <p className="text-black text-base">EUR</p>
-  </Dropdown.Item>
-
-
-
-</Dropdown>
+  
 
   <Dropdown
 
@@ -250,36 +225,8 @@ const [language, setLanguage] = useState('US');
     </Dropdown>
 
 
-<Link href="/basket"   className="relative mx-2">
-  <p className="text-white text-base  absolute -top-1 left-0 bg-red-700 rounded-full" >{count}</p>
-<RiShoppingBasketFill size={30}  cursor="pointer" onClick={async (e)=>{console.log("testing icon") }} color='white' className="mx-2" ></RiShoppingBasketFill>
-   </Link>
-   {
-
-
-
-
-     session?(<Dropdown
-
-      arrowIcon={false}
-      inline={true}
-      label={<Avatar className="w-10 h-10 mx-2"   alt="User settings" img={session.photo} rounded={true} />}
-
-
-    >
-<Link href="/profile"    >
-      <Dropdown.Item >
-      {/* {t("text:my information")} */}
-      user profile
-      </Dropdown.Item></Link>
-      <Dropdown.Divider />
-      <Dropdown.Item onClick={async()=>{signOut()}}>
-      {t("text:logout")}
-      </Dropdown.Item>
-    </Dropdown>):<Link className="mx-2" href="sum"><Button   className='flex flex-row-reverse justify-around items-center '  >
- <p>{t("text:login")}</p>
-
-    </Button></Link>}
+ 
+    
 
 
 
