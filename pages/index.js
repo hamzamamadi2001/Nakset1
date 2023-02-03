@@ -157,7 +157,7 @@ export default function Home({result})
 
 <section className="mt-28">
 <div className="flex justify-center items-center flex-row-reverse flex-wrap">
-      <h2 className="text-black font-bold text-5xl font-tar">"A taste felt in hearts"</h2>
+      <h2 className="text-black font-bold text-5xl font-tar">A taste felt in hearts</h2>
       <ReactPlayer url='https://www.youtube.com/watch?v=wWgIAphfn2U' />
     </div>
 </section>
