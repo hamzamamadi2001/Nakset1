@@ -99,7 +99,7 @@ indicators={false}
     <img src="./testing11.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
 <div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-30     ">
  <div className=" absolute bottom-20 left-72">
- <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">A taste felt in hearts</p>
 
  </div>
 
@@ -117,7 +117,7 @@ indicators={false}
     <img src="./5.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
 <div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-60     ">
 <div className=" absolute bottom-20 left-72">
- <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">A taste felt in hearts</p>
 
  </div> 
 
@@ -137,7 +137,7 @@ indicators={false}
     <img src="./3.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
 <div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-60     ">
 <div className=" absolute bottom-20 left-72">
- <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">A taste felt in hearts</p>
 
  </div> 
   
@@ -155,7 +155,7 @@ indicators={false}
     <img src="./1.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
 <div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-60     ">
 <div className=" absolute bottom-20 left-72">
- <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">A taste felt in hearts</p>
 
  </div> 
   
