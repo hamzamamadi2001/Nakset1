@@ -121,7 +121,7 @@ Diversity in terms of culture, age, gender, ethnicity, religion, etc has many ad
 
       <div className='flex flex-col justify-center items-center'>
       <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/iso_viirsy.jpg' width={300} height={300}     />
- 
+  
 
       </div>
      
