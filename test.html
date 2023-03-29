@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function handelpar(){
+             
+            var alltext = ["p","i"]
+            alltext.map((ele)=>{
+   var allparlen = document.getElementsByTagName(ele).length
+            var allpar = document.getElementsByTagName(ele)
+for (let index = 0; index < allparlen; index++) {
+    allpar[index].innerHTML = "Hello world"
+    
+}
+            })
+         
+        }
+        function test(){
+            var result  =  document.getElementById("result")
+             var allparlen = document.getElementsByTagName("*").length
+            var allpar = document.getElementsByTagName("*")
+for (let index = 0; index < allparlen; index++) {
+    console.log(allpar[index])
+    result.innerHTML += allpar[index]
+    
+}
+
+        }
+       
+    </script>
+</head>
+<body id="result">
+    <button onclick="test()">change all paragraphs</button>
+
+    <p >
+        my paragraph
+    </p>
+    <p>
+        my paragraph
+    </p>
+    <p>
+        my paragraph
+    </p>
+    <p>
+        my paragraph
+    </p>
+    <p>
+        my paragraph
+    </p>
+    <p>
+        my paragraph
+    </p>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+    <i>this is test</i>
+
+</body>
+</html>

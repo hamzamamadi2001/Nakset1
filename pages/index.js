@@ -83,15 +83,25 @@ export default function Home({result})
    return(
 <div>
  
-<Carousel slideInterval={5000}>
+<Carousel slideInterval={5000} className="relative"
+
+leftControl=" "
+rightControl=" "
+
+indicators={false}
+
+
+>
+
 <div   className=" relative   flex justify-center items-center">
 
   
-    <img src="./4.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
-<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
-<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
-<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
-<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+    <img src="./testing11.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
+<div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-30     ">
+ <div className=" absolute bottom-20 left-72">
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
+
+ </div>
 
   
   
@@ -105,10 +115,11 @@ export default function Home({result})
 
   
     <img src="./5.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
-<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
-<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
-<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
-<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+<div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-60     ">
+<div className=" absolute bottom-20 left-72">
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
+
+ </div> 
 
   
   
@@ -124,11 +135,11 @@ export default function Home({result})
 
   
     <img src="./3.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
-<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
-<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
-<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
-<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+<div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-60     ">
+<div className=" absolute bottom-20 left-72">
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
 
+ </div> 
   
   
 </div >
@@ -142,11 +153,11 @@ export default function Home({result})
 
   
     <img src="./1.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-screen  "      />
-<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-blue-900  bg-opacity-60     ">
-<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Delivering from producers to your home</p>
-<p className="  text-center text-yellow-400  font-bold text-sm sm:text-3xl md:text-2xl w-1/2">wehen ever you are and when ever you want</p>
-<Button variant="contained" onClick={() => window.location.replace("/#contact")} color="success">Contact us</Button>
+<div className="absolute w-full h-full flex justify-end  items-start m-10 flex-col backdrop-filter b     bg-black  bg-opacity-60     ">
+<div className=" absolute bottom-20 left-72">
+ <p className="   text-white font-bold text-base sm:text-5xl md:text-7xl ">"A taste felt in hearts"</p>
 
+ </div> 
   
   
 </div >
@@ -155,21 +166,20 @@ export default function Home({result})
 </div>
 </Carousel>
 
-<section className="mt-28">
-<div className="flex justify-center items-center flex-row-reverse flex-wrap">
-      <h2 className="text-black font-bold text-5xl font-tar">A taste felt in hearts</h2>
-      <ReactPlayer url='https://www.youtube.com/watch?v=wWgIAphfn2U' />
-    </div>
-</section>
+<section className="flex justify-center items-center">
 
-<section className="mt-28">
-<div   className=" relative   flex justify-center items-center">
+  <iframe src="https://player.vimeo.com/video/805646193?h=bed2fe7405&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" className="w-96   md:h-screen md:p-32  md:w-screen  h-96" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Nakset Video.mp4"></iframe>
+ </section>
+
+<section className="">
+<div    className=" relative w-full h-96  flex justify-center items-center">
 
   
-<img src="./2.jpg" style={{height:"100"}} height="500"className="w-full h-1/2 md:h-1/4  "      />
-<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-black  bg-opacity-60     ">
-<p className="  text-center text-white font-bold text-base sm:text-5xl md:text-7xl w-1/2">Are you carbing calling?</p>
-<Button variant="outlined" style={{borderColor:"white",color:"white",borderRadius:"30%",letterSpacing:"5px",marginTop:"5px"}}   className="bg-white text-blue-50">Our products</Button>
+     <Image src="/ourProducts.jpg" fill ></Image>
+ 
+<div className="absolute w-full h-full flex justify-center flex-col items-center backdrop-filter b     bg-black  bg-opacity-40     ">
+<p className="  text-center text-white font-bold text-3xl sm:text-5xl md:text-5xl w-1/2">Are your cravings calling ?</p>
+<button      className="bg-white mt-5 flex items-center justify-center text-black md:w-1/5 w-1/2 h-10 md:text-3xl font-bold font-titan rounded-full p-10">See our products</button>
 
 
 
@@ -180,11 +190,25 @@ export default function Home({result})
 </div>
  </section>
 
+<section className=" mt-20 mx-20   flex justify-center items-center flex-wrap gap-10">
+<div className="   overflow-hidden">
+<Image src="/nakset.jpeg" className="hover:scale-125 ease-linear duration-100 " width="300" height="200"  ></Image>
 
+</div>
+<div className="    overflow-hidden">
+<Image src="/nakset.jpeg" className="hover:scale-125 ease-linear duration-100 " width="300" height="200"  ></Image>
 
+</div>
+</section>
+<section className="flex justify-center items-center">
+<div className=" mt-20 mx-20 w-1/2 h-96 lg:h-screen relative  flex justify-center items-center flex-wrap gap-10">
+<Image src="/network.webp"  fill  ></Image>
+
+</div>
+</section>
 
  
- <section className='container mx-auto flex flex-col justify-between items-center  text-center mt-48'>
+ {/* <section className='container mx-auto flex flex-col justify-between items-center  text-center mt-48'>
 <div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
 <p className= 'text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our goals</p>
 </div>
@@ -230,47 +254,10 @@ export default function Home({result})
     </div>
 </div>
 
-</section>
+</section> */}
 
 
-<section className='container mx-auto flex flex-col justify-between items-center mt-48 text-center '>
-<div className='text-center mt-10 mb-10 flex flex-col justify-center items-center'>
-<p className= 'text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Our certficates</p>
-</div>
 
-<div className='flex flex-col sm:flex-row container mx-auto justify-center items-center align-middle '>
-      <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
-
-      <div className='flex flex-col justify-center items-center'>
-      <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/haccp_vi97me.png' width={300} height={300}   />
- 
-
-      </div>
-    
-    </div>
-
-    <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
-
-      <div className='flex flex-col justify-center items-center'>
-      <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/halal_nu6njq.jpg' width={300} height={300}    />
- 
-
-      </div>
-      
-    </div>
-
-    <div className='sm:w-1/3 flex flex-col flex-wrap justify-center items-center'>
-
-      <div className='flex flex-col justify-center items-center'>
-      <img src='https://res.cloudinary.com/my-online-store/image/upload/v1675290251/iso_viirsy.jpg' width={300} height={300}     />
- 
-
-      </div>
-     
-    </div>
-</div>
-
-</section>
 {/* <section className='bg-gray-100     break-all  '>
 <div className='text-center   flex flex-col justify-center items-center'>
 <p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>{t("text:our mailing list")}</p>
@@ -295,16 +282,16 @@ export default function Home({result})
  </section> */}
 
 
- 
- 
-<div id="contact" className="flex flex-col w-full justify-center items-center min-w-1/2 mt-48">
-      <p className='text-center text-yellow-500 text-5xl md:text-8xl font-tar  my-2  '>{t("text:contact us")}</p>
+ <section className="flex justify-center  flex-row flex-wrap items-center    ">
 
-
+ <div id="contact" className="flex flex-row  flex-wrap justify-center items-end md:w-1/2 lg:mt-48 mt-10 col-span-3">
+      
+<p className='text-center text-black text-5xl md:text-8xl font-tar    '>{t("text:contact us")}</p>
+  
          
           <input
-          style={{borderTop:"0px solid white",borderBottom:"1px solid gray",borderRight:"0px solid white",borderLeft:"0px solid white",}}
-         className= "mb-5 w-1/2 "
+                   style={{borderTop:"0px solid white",borderBottom:"1px solid black",borderRight:"0px solid white",borderLeft:"0px solid white",}}
+                   className= "mb-5 w-full "
            id="Email"
            type="text"
            placeholder={t("text:your name")}
@@ -313,9 +300,9 @@ export default function Home({result})
            onChange={(e)=>{setName(e.target.value)}}
          />
          <input
-                   style={{borderTop:"0px solid white",borderBottom:"1px solid gray",borderRight:"0px solid white",borderLeft:"0px solid white",}}
+                   style={{borderTop:"0px solid white",borderBottom:"1px solid black",borderRight:"0px solid white",borderLeft:"0px solid white",}}
 
-         className= "mb-5 w-1/2"
+         className= "mb-5 w-full"
            id="Email"
            type="Email"
            placeholder={t("text:your email")}
@@ -325,11 +312,11 @@ export default function Home({result})
          />
        <textarea
     id="comment"
-    style={{borderTop:"0px solid white",borderBottom:"1px solid gray",borderRight:"0px solid white",borderLeft:"0px solid white",}}
+    style={{borderTop:"0px solid white",borderBottom:"1px solid black",borderRight:"0px solid white",borderLeft:"0px solid white",}}
 
     rows={4} 
     cols={40}
-    className="mb-5 w-1/2"
+    className="mb-5 w-full"
     placeholder={t("text:write message")}
     required={true}
     onChange={(e)=>{setMessage(e.target.value)}}
@@ -338,16 +325,47 @@ export default function Home({result})
   />
 
 
-           <div className="w-auto   p-5">
-  <Button variant="outlined" onClick={async()=>{await sendMessage()}} style={{borderColor:"black",color:"black",borderRadius:"30%",letterSpacing:"5px",marginTop:"5px",width:"100%"}}   className="bg-white text-blue-50">Send message</Button>
+           <div className="w-full flex justify-center items-center  p-5">
+  {/* <Button variant="outlined" onClick={async()=>{await sendMessage()}} style={{borderColor:"black",color:"black",borderRadius:"30%",letterSpacing:"5px",marginTop:"5px",width:"100%"}}   className="bg-white text-blue-50">Send message</Button> */}
+  <button    onClick={async()=>{await sendMessage()}}   className="bg-black mt-2 flex items-center justify-center text-white md:w-1/5 w-1/2 h-10 md:text-3xl font-bold font-titan rounded-full p-10">Send</button>
+
 </div>
 
  
 
       </div>
+      <div className="col-span-3 flex justify-center items-center flex-col">
+      <p className="text-center text-2xl mb-10">Better yet, see us in person!</p>
+      <p className="text-center text-lg mb-10">We love our customers, so feel free to visit during normal business hours.</p>
+      <p className="text-center text-2xl mb-10">Nakset</p>
 
 
+          <p className="text-yellow-500 mb-5">{t("text:hours of work")}</p>
+ 
+          <lu>
+            <li className="text-black">Mon 08:00 – 15:30</li>
+            <li className="text-black">Tue
 
+08:00 – 15:30</li>
+            <li className="text-black">Wed
+
+08:00 – 15:30</li>
+            <li className="text-black">Thu
+
+08:00 – 15:30</li>
+            <li className="text-black">Fri
+
+08:00 – 15:30</li>
+<li className="text-black">closeed</li>
+<li className="text-black">closed</li>
+
+
+          </lu>
+        
+      </div>
+       </section>
+
+{/* 
       <section className='bg-white   mx-auto break-all mt-48 '>
 <div className='text-center   flex flex-col justify-center items-center'>
 <p className='text-5xl md:text-8xl font-tar  my-2  border-solid border-black border-b-4 w-fit rounded-xl'>Social</p>
@@ -368,7 +386,7 @@ export default function Home({result})
 
        </div>
 
- </section>
+ </section> */}
 </div>
 
         )

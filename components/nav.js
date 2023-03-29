@@ -119,6 +119,25 @@ const [language, setLanguage] = useState('US');
       <p className="text-white">products</p>
     </Navbar.Link>
     </div>
+
+
+    <div className="group relative   mt-5   flex justify-center items-center flex-col ">
+    
+      <p className="text-white">Brands</p>
+    
+   
+      <div className="md:absolute group -bottom-14 hidden bg-black h-20 w-28 group-hover:block justify-evenly items-center flex-col">
+    <Navbar.Link className="mx-2    " href="/Nakset">
+        <p className="group text-xl text-white">Nakset</p>
+</Navbar.Link>
+
+<Navbar.Link className="mx-2  mt-2 " href="/Mentat">
+        <p className="group text-xl text-white">Mentat</p>
+</Navbar.Link>      </div>
+    </div>
+
+
+
     <div className=" h-10 hover:border-b-2 hover:border-b-yellow-300 flex justify-center items-center">
     <Navbar.Link className="mx-2   " href="/">
     <p className="text-white">{t("text:partners")}</p>

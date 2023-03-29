@@ -1,6 +1,6 @@
 import '../styles/globals.css'
- import Nav from '../components/nav'
-import Fot from '../components/footer'
+ import Nav from '../components/navbar2'
+import Fot from '../components/foot'
 import { NextUIProvider } from '@nextui-org/react';
 import {SessionProvider} from 'next-auth/react'
 import Head from 'next/head'
@@ -28,7 +28,7 @@ let persistor = persistStore(store)
            <Component {...pageProps} />
 
 
-           {router.pathname=="/About"||router.pathname=="/products"?null:<Fot></Fot>}
+           {router.pathname=="/About"||router.pathname=="/products"||router.pathname=="/history"?null:<Fot></Fot>}
     </SessionProvider>
              </Provider></PersistGate>)
           }
